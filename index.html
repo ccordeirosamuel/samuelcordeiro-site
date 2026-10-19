@@ -69,7 +69,8 @@ a{color:inherit; text-decoration:none}
 /* secondary / supporting text in caps; body copy and serif stay as they are */
 .bar nav, .bar .cta, .lang, .tiny, .io1, .svc li, .flyer ul, .mix .tag, .row a, .copy, footer, .ticker .g, .toast, .portrait .cap, .spec b{text-transform:uppercase}
 .tiny .serif, .tiny em, footer em, footer .serif, .ticker .s, .ticker .p, .io1 .serif{text-transform:none}
-@media (max-width: 460px){ .bar .logo{font-size:13px} .bar .cta{display:none} }
+@media (max-width: 460px){ .bar .logo{font-size:13px} }
+.bar.tight .cta{display:none}
 .bar .logo .lsc{font-family:var(--pixel); font-weight:400; letter-spacing:0; text-transform:none; color:var(--yellow); font-size:1.3em; line-height:1}
 .bar nav{display:flex; gap:22px; font-weight:500; font-size:13px}
 .bar nav a{position:relative}
@@ -485,7 +486,7 @@ html.loading, html.loading body{overflow:hidden}
   .band .r2{display:grid; grid-template-columns:1fr; justify-items:start; gap:12px; border-top:1px solid rgba(255,255,255,.18); padding-block:16px 18px; position:relative}
   .band .r2::before, .band .r2::after{content:""; position:absolute; top:-6px; width:11px; height:11px; background:linear-gradient(currentColor,currentColor) center/1px 100% no-repeat, linear-gradient(currentColor,currentColor) center/100% 1px no-repeat; opacity:.7}
   .band .r2::before{left:-5px} .band .r2::after{right:-5px}
-  .band .paren{font-size:44px}
+  .band .paren{font-size:44px; justify-self:center}
   .band .glitch{font-size:calc((100vw - 2 * max(var(--gutter), env(safe-area-inset-left, 0px))) / 5.6); line-height:.9}
   .band .strip{border-top:1px solid rgba(255,255,255,.18); padding-top:14px}
 }
@@ -762,7 +763,7 @@ html.loading, html.loading body{overflow:hidden}
   <!-- contact -->
   <section id="contact" class="contact wrap">
     <div class="fx" aria-hidden="true"></div>
-    <h2>Have a<br>project <span class="serif">in mind?</span></h2>
+    <h2>Have a<br>project<br><span class="serif">in mind?</span></h2>
     <p class="sub">Send me an email with a few lines about it.<br>I reply within 24 hours.</p>
     <div class="mailrow">
       <div class="mail" id="mail">ccordeiro.samuel@gmail.com</div>
@@ -788,7 +789,7 @@ html.loading, html.loading body{overflow:hidden}
 
 <footer class="wrap">
   <span class="big mix" style="gap:.1em .3em"><span>Samuel Cordeiro</span><span class="p" style="font-size:1.2em;color:var(--yellow)">SC</span><span>Brand &amp; Web</span><span class="numbox" id="yy2" style="background:#fff;color:#0B0B0C;font-size:1.5em;font-family:var(--pixel);font-weight:400;letter-spacing:0;line-height:1;padding:.08em .22em .02em">2K26</span><em>based in</em><span>Portugal</span></span>
-  <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span><span class="tiny" style="opacity:.5">b7.5</span>
+  <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span><span class="tiny" style="opacity:.5">b7.6</span>
   <a class="tiny" href="#top">Back to top ↑</a>
 </footer>
 
@@ -1107,6 +1108,16 @@ html.loading, html.loading body{overflow:hidden}
   const hdr = document.querySelector('header.bar');
   const setHdr = () => document.documentElement.style.setProperty('--hdr', hdr.offsetHeight + 'px');
   setHdr(); addEventListener('resize', setHdr); (document.fonts && document.fonts.ready || Promise.resolve()).then(setHdr);
+  // hide the header button when logo + language switch + button don't fit on one line
+  const fitCta = () => {
+    hdr.classList.remove('tight');
+    const lg = hdr.querySelector('.logo'), hr = hdr.querySelector('.hr'), nav = hdr.querySelector('nav');
+    const used = lg.offsetWidth + hr.scrollWidth + (nav && nav.offsetWidth ? nav.offsetWidth + 16 : 0) + 16;
+    const room = hdr.clientWidth - parseFloat(getComputedStyle(hdr).paddingLeft) - parseFloat(getComputedStyle(hdr).paddingRight);
+    hdr.classList.toggle('tight', used > room);
+    setHdr();
+  };
+  fitCta(); addEventListener('resize', fitCta); document.addEventListener('langchange', () => requestAnimationFrame(fitCta)); (document.fonts && document.fonts.ready || Promise.resolve()).then(fitCta);
 
   // VI decode: titles + body copy swap through random letters and pixel blocks, resolving left to right
   (function(){
