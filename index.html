@@ -299,9 +299,21 @@ footer .big em{font-family:var(--serif); font-weight:400}
 .step .smeta .hatch{width:30px}
 .step .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px}
 
-.io1{display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:4px 16px 4px 4px; justify-self:start; font-size:11px; line-height:1}
-.io1 span{background:var(--white); color:var(--black); padding:5px 9px; border-radius:999px; font-weight:600; line-height:1}
-.io1 span + svg + span{margin-left:2px}
+.io1{display:flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:4px 16px 4px 4px; justify-self:start; font-size:11px; line-height:1; max-width:100%}
+.io1 .io-p{display:inline-flex; align-items:center; gap:8px; white-space:nowrap}
+.io1 .io-k{background:var(--white); color:var(--black); padding:5px 9px; border-radius:999px; font-weight:600; line-height:1}
+.io1 .io-arr{width:26px; height:12px; flex:none}
+.io1 .io-p + .io-arr + .io-p{margin-left:2px}
+/* when the column is too narrow for one pill, split into two stacked pills joined by a down arrow */
+.svc{container-type:inline-size}
+/* intro calendar strip: stack earlier so the 31 days never push past the screen */
+@media (max-width: 1240px){ .strip{grid-template-columns:auto 1fr auto 1fr} .strip .h2, .strip .h3{display:none} .strip .cal{grid-column:1 / -1} }
+@container (max-width: 470px){
+  .io1{flex-direction:column; align-items:flex-start; gap:6px; border:0; border-radius:0; padding:0}
+  .io1 .io-p{border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:4px 16px 4px 4px; white-space:normal}
+  .io1 .io-arr{transform:rotate(90deg); width:20px; height:10px; margin-left:12px}
+  .io1 .io-p + .io-arr + .io-p{margin-left:0}
+}
 .spec{display:grid; border-top:1.5px solid var(--black)}
 .spec div{display:flex; align-items:baseline; gap:10px; padding-block:9px; border-bottom:1px solid var(--line)}
 .spec .tiny{color:var(--mute); flex:none}
@@ -594,7 +606,7 @@ html.loading, html.loading body{overflow:hidden}
     <div class="svcs">
       <div class="svc">
         <div class="t"><span class="numbox">01</span><h3>Brand<br><span class="serif">identity</span></h3></div>
-        <div class="io1 tiny"><span>In</span>Your business and goals<svg class="ic" style="width:26px;height:12px"><use href="#s-arr"/></svg><span>Out</span>A complete brand</div>
+        <div class="io1 tiny"><span class="io-p"><span class="io-k">In</span>Your business and goals</span><svg class="ic io-arr" viewBox="0 0 40 20"><use href="#s-arr"/></svg><span class="io-p"><span class="io-k">Out</span>A complete brand</span></div>
         <p>How your business looks, everywhere. From the logo to the rules that keep it consistent.</p>
         <ul>
           <li>Logo and symbol <span class="tiny">Core</span></li>
@@ -606,7 +618,7 @@ html.loading, html.loading body{overflow:hidden}
       </div>
       <div class="svc">
         <div class="t"><span class="numbox">02</span><h3>Web<br><span class="serif">design</span></h3></div>
-        <div class="io1 tiny"><span>In</span>Your content and brand<svg class="ic" style="width:26px;height:12px"><use href="#s-arr"/></svg><span>Out</span>A website, ready to build</div>
+        <div class="io1 tiny"><span class="io-p"><span class="io-k">In</span>Your content and brand</span><svg class="ic io-arr" viewBox="0 0 40 20"><use href="#s-arr"/></svg><span class="io-p"><span class="io-k">Out</span>A website, ready to build</span></div>
         <p>Websites designed screen by screen in Figma, ready for a developer to build.</p>
         <ul>
           <li>Site structure <span class="tiny">Core</span></li>
