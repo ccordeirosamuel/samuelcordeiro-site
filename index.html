@@ -75,8 +75,10 @@ a{color:inherit; text-decoration:none}
 .bar nav a{position:relative}
 .bar nav a::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .5s var(--ease)}
 .bar nav a:hover::after{transform:scaleX(1); transform-origin:left}
-.bar .cta{background:var(--white); color:var(--black); padding:6px 12px; font-weight:600; font-size:13px; border-radius:999px; transition:background .3s}
-.bar .cta:hover{background:var(--yellow)}
+.bar .cta{background:var(--yellow); color:var(--black); padding:6px 12px; font-weight:600; font-size:13px; border-radius:999px; display:inline-flex; align-items:center; transition:background .3s, padding .35s var(--ease)}
+.bar .cta .cta-arr{display:inline-block; max-width:0; opacity:0; overflow:hidden; transform:translateX(-8px); transition:max-width .35s var(--ease), opacity .25s, transform .35s var(--ease), margin .35s var(--ease)}
+.bar .cta:hover .cta-arr, .bar .cta:focus-visible .cta-arr{max-width:1.2em; opacity:1; transform:none; margin-left:6px}
+.bar .cta:hover, .bar .cta:focus-visible{background:var(--magenta)}
 
 /* liquid photo */
 .liquid-band{position:relative; overflow:hidden; height:clamp(220px, 32vw, 460px); margin-top:var(--hdr, 52px); background:#9EA3B8}
@@ -559,7 +561,7 @@ html.loading, html.loading body{overflow:hidden}
 <header class="bar">
   <a class="logo" href="#top" aria-label="Samuel Cordeiro"><span>Samuel</span><span class="lsc" aria-hidden="true">SC</span><span>Cordeiro</span></a>
   <nav aria-label="Main"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">How it works</a><a href="#about">About</a></nav>
-  <span class="hr"><button class="lang" id="langBtn" type="button" aria-label="Switch language / Mudar idioma"><span data-l="en" class="on">EN</span><span data-l="pt">PT</span></button><a class="cta" href="#contact">Start a project</a></span>
+  <span class="hr"><button class="lang" id="langBtn" type="button" aria-label="Switch language / Mudar idioma"><span data-l="en" class="on">EN</span><span data-l="pt">PT</span></button><a class="cta" href="#contact">Start a project<span class="cta-arr" aria-hidden="true">→</span></a></span>
 </header>
 
 <main id="top">
