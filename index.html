@@ -75,8 +75,8 @@ a{color:inherit; text-decoration:none}
 .bar nav a{position:relative}
 .bar nav a::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .5s var(--ease)}
 .bar nav a:hover::after{transform:scaleX(1); transform-origin:left}
-.bar .cta{background:var(--yellow); color:var(--black); padding:6px 12px; font-weight:600; font-size:13px; border-radius:999px; display:inline-flex; align-items:center; transition:background .3s, padding .35s var(--ease)}
-.bar .cta .cta-arr{display:inline-block; max-width:0; opacity:0; overflow:hidden; transform:translateX(-8px); transition:max-width .35s var(--ease), opacity .25s, transform .35s var(--ease), margin .35s var(--ease)}
+.bar .cta{background:var(--yellow); color:var(--black); padding:6px 12px; font-weight:600; font-size:13px; border-radius:999px; display:inline-flex; align-items:center; transition:background .6s cubic-bezier(.76,0,.24,1), padding .6s cubic-bezier(.76,0,.24,1)}
+.bar .cta .cta-arr{display:inline-block; max-width:0; opacity:0; overflow:hidden; transform:translateX(-8px); transition:max-width .6s cubic-bezier(.76,0,.24,1), opacity .45s cubic-bezier(.76,0,.24,1), transform .6s cubic-bezier(.76,0,.24,1), margin .6s cubic-bezier(.76,0,.24,1)}
 .bar .cta:hover .cta-arr, .bar .cta:focus-visible .cta-arr{max-width:1.2em; opacity:1; transform:none; margin-left:6px}
 .bar .cta:hover, .bar .cta:focus-visible{background:var(--magenta)}
 
@@ -98,8 +98,13 @@ a{color:inherit; text-decoration:none}
 .band{background:var(--black); color:var(--white); padding-block:clamp(18px,2.4vw,32px) clamp(14px,1.6vw,22px); display:grid; gap:clamp(10px,1.4vw,18px)}
 .band .r1, .band .r2{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.1em .35em; line-height:.92}
 .band .name{font-weight:700; letter-spacing:-.06em; font-size:clamp(44px, 8.2vw, 136px)}
-.arrows{display:inline-grid; grid-template-columns:auto auto; align-items:center; font-family:var(--serif); font-size:clamp(20px, 3.3vw, 54px); line-height:.95; column-gap:.12em}
-.arrows svg{width:1.6em; height:.8em; overflow:visible}
+.arrows{display:inline-grid; grid-template-columns:max-content; font-family:var(--serif); font-size:clamp(18px, 2.7vw, 44px); line-height:.95; row-gap:.08em}
+/* Branding ─┐  then  Web Design ←┘ : two hairline elbows sharing one right edge */
+.ar-row{display:flex; align-items:flex-start; gap:.18em}
+.ar1, .ar2{flex:1 1 auto; min-width:1.4em; position:relative; border:0 solid currentColor}
+.ar1{height:.62em; margin-top:.36em; border-top-width:1.4px; border-right-width:1.4px}
+.ar2{height:.55em; margin-top:-.06em; border-bottom-width:1.4px; border-right-width:1.4px}
+.ar2::before{content:""; position:absolute; left:1px; bottom:-.17em; width:.32em; height:.32em; border-left:1.4px solid currentColor; border-bottom:1.4px solid currentColor; transform:rotate(45deg); transform-origin:center}
 .dotted{display:inline-flex; align-items:center; font-family:var(--serif); font-size:clamp(40px, 7.4vw, 124px); letter-spacing:-.03em}
 .dotted svg{width:.62em; height:.62em; margin:0 -.045em 0 -.06em; transform:translateY(.05em)}
 .dotted svg circle{animation:spin 18s linear infinite; transform-origin:50% 50%}
@@ -478,7 +483,7 @@ html.loading, html.loading body{overflow:hidden}
   .band .r1{display:grid; grid-template-columns:1fr auto; align-items:end; column-gap:0; row-gap:0}
   .band .name{grid-column:1 / -1; font-size:calc((100vw - 2 * max(var(--gutter), env(safe-area-inset-left, 0px))) / 6.1); padding-bottom:16px}
   .band .r1 .arrows, .band .r1 .dotted{border-top:1px solid rgba(255,255,255,.18); padding-block:14px; align-self:stretch; align-items:center}
-  .band .r1 .arrows{font-size:clamp(16px, 5vw, 24px); justify-content:start; padding-right:12px}
+  .band .r1 .arrows{font-size:clamp(15px, 4.4vw, 21px); justify-content:start; padding-right:12px; align-self:center}
   .band .r1 .dotted{font-size:clamp(30px, 9.4vw, 40px); justify-content:flex-end}
   .band .r2{display:grid; grid-template-columns:1fr; justify-items:start; gap:12px; border-top:1px solid rgba(255,255,255,.18); padding-block:16px 18px; position:relative}
   .band .r2::before, .band .r2::after{content:""; position:absolute; top:-6px; width:11px; height:11px; background:linear-gradient(currentColor,currentColor) center/1px 100% no-repeat, linear-gradient(currentColor,currentColor) center/100% 1px no-repeat; opacity:.7}
@@ -575,10 +580,8 @@ html.loading, html.loading body{overflow:hidden}
     <div class="r1">
       <h1 class="name" style="margin:0" aria-label="Samuel Cordeiro"><span>Samuel</span><span class="nsc" aria-hidden="true">SC</span><span>Cordeiro</span></h1>
       <span class="arrows" aria-label="Branding and web design">
-        <span>Branding</span>
-        <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M0 2 H34 V16" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M30 12 L34 18 L38 12" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-        <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M6 18 V4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2 8 L6 2 L10 8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 18 H40" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-        <span>Web Design</span>
+        <span class="ar-row"><span>Branding</span><i class="ar1" aria-hidden="true"></i></span>
+        <span class="ar-row"><span>Web Design</span><i class="ar2" aria-hidden="true"></i></span>
       </span>
       <span class="dotted" aria-label="Portugal">P<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="0 5.3407"/></svg>rtugal</span>
     </div>
