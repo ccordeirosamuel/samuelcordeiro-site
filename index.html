@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Samuel Cordeiro is a brand and web designer based in Portugal, working with clients worldwide.">
+<meta property="og:title" content="Samuel Cordeiro — Brand &amp; Web Designer">
+<meta property="og:description" content="Brand identities and websites, designed in Portugal.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://samuelcordeiro.com/">
+<link rel="canonical" href="https://samuelcordeiro.com/">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Samuel Cordeiro — Brand &amp; Web Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400&family=Jacquard+24&display=swap">
+<style>
+/* Layout: club-night poster bands (black info strips, op-art, liquid photo, boxed thin numerals) + festival flyers scattered on a grey table (neon glows). Light grey ground, by choice. */
+:root{
+  --table:#E3E3E0;
+  --paper:#F4F4F2;
+  --black:#0B0B0C;
+  --white:#FFFFFF;
+  --mute:#76767B;
+  --line:rgba(11,11,12,.16);
+  --magenta:#FF22D3;
+  --violet:#3B12FF;
+  --yellow:#F6F21C;
+  --sans:"Neue Haas Grotesk Display Pro", "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --serif:"Newsreader", "Times New Roman", Georgia, serif;
+  --pixel:"Jacquard 24", "Courier New", monospace;
+  --gutter:clamp(16px, 2.6vw, 40px);
+  --ease:cubic-bezier(.2,.7,0,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{background:var(--table); scroll-behavior:smooth}
+body{background:var(--table); color:var(--black); font-family:var(--sans); font-size:14px; line-height:1.25; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:45; background:var(--black)}
+::selection{background:var(--magenta); color:#fff}
+a{color:inherit; text-decoration:none}
+:focus-visible{outline:2px solid var(--magenta); outline-offset:3px}
+.wrap{padding-left:max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right:max(var(--gutter), env(safe-area-inset-right, 0px))}
+
+/* paper texture */
+.paper{position:fixed; inset:0; z-index:80; pointer-events:none; opacity:.08; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* type helpers */
+.tiny{font-size:10px; font-weight:500; line-height:1.15; letter-spacing:-.005em}
+.serif{font-family:var(--serif); font-weight:400; letter-spacing:-.02em}
+.pix{font-family:var(--pixel); font-weight:400; letter-spacing:0}
+.numbox{display:inline-block; background:var(--black); color:var(--white); font-weight:200; letter-spacing:-.05em; line-height:.86; padding:.04em .1em .02em; font-variant-numeric:tabular-nums}
+.hatch{display:inline-block; width:44px; height:12px; flex:none; background:repeating-linear-gradient(-62deg, currentColor 0 1px, transparent 1px 3.5px)}
+.circ{display:inline-grid; place-items:center; width:20px; height:20px; border:1px solid currentColor; border-radius:50%; font-size:8.5px; font-weight:600; font-variant-numeric:tabular-nums}
+
+/* top bar */
+.bar{position:fixed; top:env(safe-area-inset-top, 0px); left:0; right:0; z-index:40; background:var(--black); color:var(--white); padding-block:11px; display:flex; justify-content:space-between; align-items:center; gap:16px}
+.bar .logo{font-weight:700; letter-spacing:-.04em; font-size:16px}
+.bar nav{display:flex; gap:22px; font-weight:500; font-size:13px}
+.bar nav a{position:relative}
+.bar nav a::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .5s var(--ease)}
+.bar nav a:hover::after{transform:scaleX(1); transform-origin:left}
+.bar .cta{background:var(--white); color:var(--black); padding:6px 12px; font-weight:600; font-size:13px; border-radius:999px; transition:background .3s}
+.bar .cta:hover{background:var(--yellow)}
+
+/* liquid photo */
+.liquid-band{position:relative; overflow:hidden; height:clamp(220px, 32vw, 460px); margin-top:42px; background:#9EA3B8}
+.liquid{position:absolute; inset:-14%; filter:url(#liquid);
+  background:
+    radial-gradient(40% 30% at 30% 40%, #D9C4A2 0, transparent 70%),
+    radial-gradient(35% 45% at 70% 60%, #5F8E91 0, transparent 70%),
+    radial-gradient(50% 40% at 55% 30%, #C3BEEA 0, transparent 72%),
+    radial-gradient(30% 30% at 20% 75%, #E9E6F5 0, transparent 70%),
+    radial-gradient(45% 35% at 85% 25%, #7C6FB3 0, transparent 70%),
+    linear-gradient(160deg, #A9AFC9, #7E879E);
+  animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(4%, -3%) rotate(2deg) scale(1.05)}}
+.liquid-band .numbox{position:absolute; left:50%; top:0; transform:translateX(-50%); font-size:clamp(56px, 8vw, 120px); z-index:2}
+
+/* black poster band */
+.band{background:var(--black); color:var(--white); padding-block:clamp(18px,2.4vw,32px) clamp(14px,1.6vw,22px); display:grid; gap:clamp(10px,1.4vw,18px)}
+.band .r1, .band .r2{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.1em .35em; line-height:.92}
+.band .name{font-weight:700; letter-spacing:-.06em; font-size:clamp(44px, 8.2vw, 136px)}
+.arrows{display:inline-grid; grid-template-columns:auto auto; align-items:center; font-family:var(--serif); font-size:clamp(20px, 3.3vw, 54px); line-height:.95; column-gap:.12em}
+.arrows svg{width:1.6em; height:.8em; overflow:visible}
+.dotted{display:inline-flex; align-items:center; font-family:var(--serif); font-size:clamp(40px, 7.4vw, 124px); letter-spacing:-.03em}
+.dotted svg{width:.66em; height:.66em; margin:0 .02em; transform:translateY(.04em)}
+.dotted svg circle{animation:spin 18s linear infinite; transform-origin:50% 50%}
+@keyframes spin{to{transform:rotate(360deg)}}
+.paren{font-family:var(--serif); font-size:clamp(40px, 7.4vw, 124px); letter-spacing:-.03em; display:inline-flex; align-items:center; gap:.2em}
+.paren .stack{display:inline-grid; justify-items:center; line-height:.9}
+.paren .stack small{font-family:var(--pixel); font-size:.34em; letter-spacing:.04em}
+.paren .stack .sp{font-size:.3em; opacity:.7}
+.glitch{font-family:var(--pixel); font-size:clamp(46px, 8.6vw, 146px); line-height:.8; letter-spacing:-.01em}
+.strip{display:grid; grid-template-columns:auto 1.4fr auto auto 1.4fr auto 3fr; gap:14px; align-items:center; border-top:1px solid rgba(255,255,255,.18); padding-top:12px}
+.strip .circs{display:flex; gap:6px; align-items:center}
+.cal{display:grid; gap:4px; min-width:0}
+.cal .rule{position:relative; height:1px; background:currentColor}
+.cal .rule i{position:absolute; top:-4px; width:8px; height:8px; margin-left:-4px; background:var(--magenta); border-radius:50% 50% 0 50%; transform:rotate(45deg)}
+.cal .days{display:flex; justify-content:space-between; font-size:8.5px; font-weight:600; font-variant-numeric:tabular-nums}
+.cal .days span{display:inline-grid; place-items:center; width:15px; height:15px}
+.cal .days .today{border:1px solid currentColor; border-radius:50%}
+
+/* op-art */
+.op{position:relative; background:var(--white); overflow:hidden}
+.op canvas{display:block; width:100%; height:clamp(340px, 62vw, 860px)}
+.op .numbox.top{position:absolute; left:50%; top:0; transform:translateX(-50%); font-size:clamp(56px, 8vw, 120px)}
+.op .foot{position:absolute; left:0; right:0; bottom:0; background:var(--white); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:6px 16px; padding-top:6px; font-weight:600; letter-spacing:-.045em; font-size:clamp(18px, 2.6vw, 40px); line-height:1}
+.op .foot .numbox{font-size:1.9em; margin-bottom:-.06em}
+.op .foot em{font-family:var(--serif); font-weight:400; font-style:italic; letter-spacing:-.02em}
+
+/* section heads */
+.head{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:16px; padding-block:clamp(70px,9vw,130px) clamp(20px,3vw,40px)}
+.head h2{margin:0; font-weight:700; letter-spacing:-.06em; line-height:.86; font-size:clamp(48px, 8vw, 136px)}
+.head h2 .serif{font-weight:400}
+.head p{margin:0; max-width:34ch; font-size:15px; font-weight:500; letter-spacing:-.02em}
+
+/* flyers table */
+.table{position:relative; overflow:hidden; padding-bottom:clamp(60px,8vw,120px)}
+.flyers{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:clamp(14px, 2vw, 30px); align-items:start; padding-block:20px 0}
+.flyer{position:relative; aspect-ratio:1/2.05; overflow:hidden; isolation:isolate; padding:clamp(12px,1.3vw,20px); display:flex; flex-direction:column; justify-content:space-between;
+  box-shadow:0 22px 40px -22px rgba(0,0,0,.45), 0 2px 4px rgba(0,0,0,.08);
+  transform:translateY(var(--y,0)) rotate(var(--r,0deg)); transition:transform .9s var(--ease), box-shadow .9s var(--ease); max-width:100%}
+.flyer:hover{transform:translateY(calc(var(--y,0) - 10px)) rotate(0deg) scale(1.03); z-index:5; box-shadow:0 40px 60px -30px rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.08)}
+.flyer:nth-child(1){--r:-5deg; --y:30px}
+.flyer:nth-child(2){--r:3.5deg; --y:-10px}
+.flyer:nth-child(3){--r:-2deg; --y:60px}
+.flyer:nth-child(4){--r:6deg; --y:10px}
+.flyer h3{margin:0; font-weight:700; letter-spacing:-.055em; line-height:.86; font-size:clamp(30px, 3.4vw, 54px)}
+.flyer ul{list-style:none; margin:.6em 0 0; padding:0; font-weight:500; font-size:clamp(11px, 1.05vw, 15px); letter-spacing:-.025em; line-height:1.02}
+.flyer .bot{display:flex; justify-content:space-between; align-items:flex-end; gap:8px}
+.flyer .bot .big{font-weight:700; letter-spacing:-.055em; line-height:.86; font-size:clamp(22px, 2.3vw, 36px)}
+.flyer .bot .tiny{text-align:right}
+.flyer .fx{position:absolute; inset:0; z-index:-1; pointer-events:none}
+.flyer .go{position:absolute; right:clamp(12px,1.3vw,20px); top:clamp(12px,1.3vw,20px); font-weight:600; transition:transform .5s var(--ease)}
+.flyer:hover .go{transform:translate(3px,-3px)}
+
+/* 1: starburst on black */
+.f-burst{background:#07040F; color:var(--white)}
+.f-burst .fx{inset:-20%; background:repeating-conic-gradient(from 8deg at 50% 52%, #07040F 0deg, var(--violet) 16deg, var(--magenta) 30deg, var(--violet) 44deg, #07040F 60deg); filter:blur(9px); animation:rot 40s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+/* 2: yellow hexagon glow */
+.f-hex{background:var(--paper)}
+.f-hex .fx{inset:8% -30% 22%; background:radial-gradient(circle, #FFFFFF 0 22%, var(--yellow) 52%, transparent 72%); clip-path:polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%); filter:blur(14px); animation:breathe 7s ease-in-out infinite alternate}
+@keyframes breathe{to{transform:scale(1.08)}}
+/* 3: pink waves */
+.f-wave{background:var(--paper)}
+.f-wave .fx svg{position:absolute; left:-5%; width:110%; height:auto; overflow:visible}
+.f-wave .fx path{fill:var(--paper); filter:drop-shadow(0 -6px 10px var(--magenta)) drop-shadow(0 -2px 3px var(--magenta))}
+/* 4: magenta on yellow */
+.f-sun{background:var(--yellow)}
+.f-sun .fx{background:radial-gradient(42% 26% at 50% 54%, var(--white) 0, var(--magenta) 46%, transparent 74%); filter:blur(8px); animation:breathe 6s ease-in-out infinite alternate}
+
+/* services */
+.svc-band{background:var(--black); color:var(--white)}
+.svc-band .head p{color:rgba(255,255,255,.72)}
+.svcs{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid rgba(255,255,255,.2)}
+.svc{padding-block:clamp(24px,3vw,40px); display:grid; gap:22px; align-content:start; min-width:0}
+.svc + .svc{border-left:1px solid rgba(255,255,255,.2); padding-left:clamp(16px,2.4vw,36px)}
+.svc .t{display:flex; align-items:flex-start; gap:14px}
+.svc .t .numbox{background:var(--white); color:var(--black); font-size:clamp(40px,5vw,80px)}
+.svc h3{margin:0; font-weight:700; letter-spacing:-.06em; line-height:.86; font-size:clamp(40px,5.4vw,92px)}
+.svc h3 .serif{font-weight:400}
+.svc p{margin:0; font-size:clamp(16px,1.5vw,20px); font-weight:500; letter-spacing:-.025em; max-width:30ch}
+.svc ul{list-style:none; margin:0; padding:0; display:grid; border-top:1px solid rgba(255,255,255,.2)}
+.svc li{position:relative; display:flex; justify-content:space-between; gap:16px; padding-block:10px; padding-left:20px; border-bottom:1px solid rgba(255,255,255,.2); font-weight:500; letter-spacing:-.02em; font-size:15px; transition:padding .5s var(--ease), color .3s}
+.svc li::before{content:""; position:absolute; left:0; top:50%; width:8px; height:8px; border-left:1.4px solid currentColor; border-bottom:1.4px solid currentColor; transform:translateY(-75%)}
+.svc li:hover{padding-left:30px; color:var(--yellow)}
+.svc li .tiny{opacity:.6}
+.note{display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:center; padding-block:22px clamp(40px,6vw,80px); border-top:1px solid rgba(255,255,255,.2)}
+.note p{margin:0; font-size:clamp(16px,1.6vw,22px); font-weight:500; letter-spacing:-.03em; max-width:58ch}
+.note p b{color:var(--yellow); font-weight:600}
+
+/* process */
+.steps{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:clamp(14px,2vw,30px); padding-bottom:clamp(40px,6vw,80px)}
+.step{background:var(--paper); padding:clamp(16px,1.8vw,26px); display:grid; gap:40px; align-content:space-between; min-height:clamp(220px, 22vw, 320px); position:relative; overflow:hidden; isolation:isolate}
+.step .numbox{font-size:clamp(56px, 6vw, 96px); justify-self:start}
+.step h3{margin:0; font-weight:700; letter-spacing:-.05em; font-size:clamp(26px,2.6vw,40px); line-height:.9}
+.step p{margin:.5em 0 0; font-weight:500; letter-spacing:-.02em; font-size:15px; max-width:32ch}
+.step::after{content:""; position:absolute; right:-30%; top:-30%; width:70%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle, var(--c), transparent 70%); filter:blur(20px); opacity:0; transition:opacity .6s; z-index:-1}
+.step:hover::after{opacity:.9}
+.step:nth-child(1){--c:var(--yellow)} .step:nth-child(2){--c:var(--magenta)} .step:nth-child(3){--c:var(--violet)}
+
+/* about */
+.about{display:grid; grid-template-columns:5fr 7fr; gap:clamp(16px,3vw,48px); align-items:stretch; padding-bottom:clamp(40px,6vw,80px)}
+.portrait{position:relative; overflow:hidden; aspect-ratio:4/5; background:#9EA3B8; max-width:100%}
+.portrait .liquid{animation-duration:16s}
+.portrait .numbox{position:absolute; left:0; bottom:0; font-size:clamp(48px,6vw,96px); z-index:2}
+.portrait .cap{position:absolute; right:12px; top:12px; color:var(--white); z-index:2; text-align:right}
+.about-r{display:flex; flex-direction:column; justify-content:space-between; gap:40px; min-width:0}
+.about-r h2{margin:0; font-weight:700; letter-spacing:-.06em; line-height:.88; font-size:clamp(40px, 6vw, 100px)}
+.about-r h2 .serif{font-weight:400}
+.about-r h2 .pix{font-size:1.05em}
+.about-r p{margin:0; font-size:clamp(17px,1.7vw,24px); font-weight:500; letter-spacing:-.03em; line-height:1.15; max-width:36ch}
+.facts{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; border-top:1px solid var(--line); padding-top:12px}
+.facts div{display:grid; gap:4px}
+.facts .tiny{color:var(--mute)}
+.facts b{font-weight:600; letter-spacing:-.02em; font-size:15px}
+
+/* contact flyer */
+.contact{position:relative; overflow:hidden; isolation:isolate; background:var(--paper); padding-block:clamp(80px,10vw,150px) clamp(28px,3vw,40px); display:grid; gap:clamp(28px,4vw,56px)}
+.contact .fx{position:absolute; inset:-10% -10% 10% 30%; z-index:-1; background:radial-gradient(circle, #FFFFFF 0 18%, var(--yellow) 48%, transparent 70%); clip-path:polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%); filter:blur(22px); animation:breathe 8s ease-in-out infinite alternate}
+.contact h2{margin:0; font-weight:700; letter-spacing:-.065em; line-height:.84; font-size:clamp(56px, 12vw, 210px)}
+.contact h2 .serif{font-weight:400}
+.contact .sub{margin:0; font-size:clamp(17px,1.7vw,24px); font-weight:500; letter-spacing:-.03em; max-width:34ch}
+.mail{font-weight:600; letter-spacing:-.05em; line-height:1; font-size:clamp(24px, 4.6vw, 76px); overflow-wrap:anywhere; max-width:100%; justify-self:start; border-bottom:2px solid var(--black); padding-bottom:.08em}
+.row{display:flex; flex-wrap:wrap; gap:12px 26px; align-items:center}
+.copy{font:inherit; font-weight:600; font-size:15px; background:var(--black); color:var(--white); border:0; border-radius:999px; padding:12px 20px; cursor:pointer; transition:background .3s, color .3s}
+.copy:hover{background:var(--magenta)}
+.row a{font-weight:600; letter-spacing:-.02em; font-size:15px}
+.row a span{display:inline-block; transition:transform .4s var(--ease)}
+.row a:hover span{transform:translate(3px,-3px)}
+
+footer{background:var(--black); color:var(--white); padding-block:14px calc(14px + env(safe-area-inset-bottom, 0px)); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px 20px}
+footer .big{font-weight:600; letter-spacing:-.045em; font-size:clamp(16px,2vw,28px)}
+footer .big em{font-family:var(--serif); font-weight:400}
+
+.toast{position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 20px); opacity:0; background:var(--black); color:var(--white); padding:10px 16px; border-radius:999px; z-index:90; transition:all .5s var(--ease); pointer-events:none; font-weight:600}
+.toast.show{opacity:1; transform:translate(-50%,0)}
+
+/* poster micro-elements, reused across sections */
+.ic{display:inline-block; width:1em; height:1em; vertical-align:middle; overflow:visible; flex:none}
+.ic use{fill:none; stroke:currentColor; stroke-width:1.4}
+.spark{width:16px; height:16px}
+.mix{display:flex; flex-wrap:wrap; align-items:center; gap:.06em .28em}
+.mix .br{flex-basis:100%; height:0}
+.mix .g{font-weight:700; letter-spacing:-.06em}
+.mix .s{font-family:var(--serif); font-weight:400; letter-spacing:-.03em}
+.mix .p{font-family:var(--pixel); font-weight:400; letter-spacing:0; line-height:.8}
+.mix .o{display:inline-flex; align-items:center}
+.mix .o svg{width:.62em; height:.62em; margin:0 .02em; animation:spin 18s linear infinite}
+.mix .arr{display:inline-grid; grid-template-columns:auto auto; align-items:center; column-gap:.1em; font-family:var(--serif); font-weight:400; font-size:.34em; line-height:.95; letter-spacing:-.02em}
+.mix .arr svg{width:1.6em; height:.8em; overflow:visible}
+.mix .tag{font-family:var(--sans); font-size:10px; font-weight:500; letter-spacing:-.005em; line-height:1.15}
+.strip2{display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; border-block:1px solid var(--line); padding-block:10px; margin-bottom:clamp(24px,3vw,40px)}
+.svc-band .strip2, footer .strip2{border-color:rgba(255,255,255,.2)}
+.strip2 .grow{flex:1; min-width:180px}
+.strip2 .circs{display:flex; gap:5px}
+.ruler{position:relative; height:30px}
+.ruler::before{content:""; position:absolute; left:0; right:0; bottom:0; height:6px; background:repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 8px); opacity:.6}
+.ruler::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:currentColor}
+.ruler b{position:absolute; top:0; transform:translateX(-50%); font-size:9px; font-weight:600; white-space:nowrap}
+.ruler i{position:absolute; bottom:9px; width:8px; height:8px; margin-left:-4px; background:var(--magenta); border-radius:50% 50% 0 50%; transform:rotate(45deg)}
+.barcode{display:inline-block; height:18px; width:66px; flex:none}
+.regs{position:absolute; inset:10px; pointer-events:none; z-index:3}
+.regs i{position:absolute; width:14px; height:14px; background:linear-gradient(currentColor,currentColor) center/1px 100% no-repeat, linear-gradient(currentColor,currentColor) center/100% 1px no-repeat}
+.regs i:nth-child(1){left:0; top:0} .regs i:nth-child(2){right:0; top:0} .regs i:nth-child(3){left:0; bottom:0} .regs i:nth-child(4){right:0; bottom:0}
+.stamp{position:relative; width:clamp(96px,10vw,136px); aspect-ratio:1; display:grid; place-items:center; color:var(--black); flex:none}
+.stamp .hex{position:absolute; inset:0; background:var(--yellow); clip-path:polygon(25% 6%,75% 6%,100% 50%,75% 94%,25% 94%,0 50%)}
+.stamp svg{position:absolute; inset:0; width:100%; height:100%; animation:spin 24s linear infinite}
+.stamp svg text{font-family:var(--sans); font-size:7.2px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; fill:currentColor}
+.stamp b{position:relative; font-family:var(--pixel); font-weight:400; font-size:clamp(20px,2.1vw,28px); line-height:.85; text-align:center}
+.stamp.ink{color:var(--white)} .stamp.ink .hex{background:var(--black)}
+.ticker{background:var(--black); color:var(--white); overflow:hidden; white-space:nowrap; padding-block:9px; border-block:1px solid rgba(255,255,255,.14)}
+.ticker .tr{display:inline-flex; align-items:center; gap:22px; padding-left:22px; animation:tick 46s linear infinite}
+.ticker .tr > *{flex:none}
+.ticker .p{font-family:var(--pixel); font-size:24px; line-height:1}
+.ticker .s{font-family:var(--serif); font-size:20px; line-height:1}
+.ticker .g{font-weight:700; letter-spacing:-.05em; font-size:19px}
+@keyframes tick{to{transform:translateX(-50%)}}
+.fmid{display:flex; align-items:center; gap:8px; position:relative}
+.fmid .line{flex:1; height:1px; background:currentColor; opacity:.5}
+.step .smeta{display:flex; align-items:center; gap:8px; justify-self:stretch}
+.step .smeta .hatch{width:30px}
+.step .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px}
+
+.io1{display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:7px 14px; justify-self:start; font-size:11px}
+.io1 span{background:var(--white); color:var(--black); padding:1px 6px; border-radius:999px; font-weight:600}
+.spec{display:grid; border-top:1.5px solid var(--black)}
+.spec div{display:flex; align-items:baseline; gap:10px; padding-block:9px; border-bottom:1px solid var(--line)}
+.spec .tiny{color:var(--mute); flex:none}
+.spec .dots{flex:1; border-bottom:1px dotted var(--black); transform:translateY(-3px); min-width:20px}
+.spec b{font-weight:600; letter-spacing:-.02em; font-size:15px}
+.dot4{width:10px; height:10px; border-radius:50%; background:#1DB954; box-shadow:0 0 0 4px rgba(29,185,84,.2); animation:pulse4 2s ease-in-out infinite}
+@keyframes pulse4{50%{box-shadow:0 0 0 7px rgba(29,185,84,0)}}
+
+@media (max-width: 1000px){
+  .strip{grid-template-columns:auto 1fr auto 1fr}
+  .strip .h2, .strip .h3{display:none}
+  .strip .cal{grid-column:1 / -1}
+  .flyers{grid-template-columns:repeat(2, minmax(0,1fr)); row-gap:50px}
+}
+@media (max-width: 720px){
+  .bar nav{display:none}
+  .svcs{grid-template-columns:1fr}
+  .svc + .svc{border-left:0; padding-left:0; border-top:1px solid rgba(255,255,255,.2)}
+  .steps{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .flyer:nth-child(n){--y:0px}
+  .flyer h3{font-size:clamp(26px, 8vw, 44px)}
+  .flyer ul{font-size:12px}
+}
+@media (max-width: 460px){
+  .strip{grid-template-columns:1fr 1fr}
+  .strip .hatch, .strip .circs{display:none}
+  .cal .days span:nth-child(even){display:none}
+  .note{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{animation:none !important; transition:none !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="liquid" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.006 0.018" numOctaves="2" seed="5" result="t">
+      <animate attributeName="baseFrequency" dur="24s" values="0.006 0.018;0.009 0.024;0.006 0.018" repeatCount="indefinite"/>
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="140" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <symbol id="s-spark" viewBox="0 0 20 20"><path d="M10 6v8M6 10h8"/><circle cx="10" cy="1.6" r=".9"/><circle cx="10" cy="18.4" r=".9"/><circle cx="1.6" cy="10" r=".9"/><circle cx="18.4" cy="10" r=".9"/></symbol>
+  <symbol id="s-o" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="0 6.67"/></symbol>
+  <symbol id="s-bd" viewBox="0 0 40 20"><path d="M0 2 H34 V16 M30 12 L34 18 L38 12"/></symbol>
+  <symbol id="s-bu" viewBox="0 0 40 20"><path d="M6 18 V4 M2 8 L6 2 L10 8 M6 18 H40"/></symbol>
+  <symbol id="s-arr" viewBox="0 0 40 20"><path d="M0 10 H38 M32 4 L38 10 L32 16"/></symbol>
+</svg>
+
+<header class="bar wrap">
+  <a class="logo" href="#top">Samuel Cordeiro</a>
+  <nav aria-label="Main"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">How it works</a><a href="#about">About</a></nav>
+  <a class="cta" href="#contact">Start a project</a>
+</header>
+
+<main id="top">
+  <!-- hero: the poster -->
+  <div class="liquid-band" aria-hidden="true">
+    <div class="liquid"></div>
+    <span class="numbox" id="yy">26</span>
+  </div>
+
+  <section class="band wrap" aria-label="Intro">
+    <div class="r1">
+      <h1 class="name" style="margin:0">Samuel Cordeiro</h1>
+      <span class="arrows" aria-label="Brand and web">
+        <span>Brand</span>
+        <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M0 2 H34 V16" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M30 12 L34 18 L38 12" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M6 18 V4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2 8 L6 2 L10 8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 18 H40" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        <span>Web</span>
+      </span>
+      <span class="dotted" aria-label="Portugal">P<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 6.67"/></svg>rtugal</span>
+    </div>
+    <div class="r2">
+      <span class="paren">( <span class="stack"><small>since 2020</small><span>Designer</span></span> )</span>
+      <span class="glitch">Brands &amp; Sites</span>
+    </div>
+    <div class="strip tiny">
+      <span class="hatch"></span>
+      <span>Samuel Cordeiro<br>Brand &amp; web designer</span>
+      <span class="circs h2"><span class="circ" id="cd">19</span><span class="circ" id="cm">10</span><span>2 0 2 6</span></span>
+      <span class="hatch h3"></span>
+      <span>Based in Portugal<br>Working with clients worldwide<br>Replies within 24 hours</span>
+      <span class="hatch h3"></span>
+      <div class="cal" aria-label="Calendar for this month">
+        <div class="rule"><i id="pin"></i></div>
+        <div class="days" id="days"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="op" aria-label="Selected work below">
+    <canvas id="op" aria-hidden="true"></canvas>
+    <span class="numbox top">04</span>
+    <div class="foot wrap">
+      <span>Selected work</span>
+      <span class="pix" style="font-size:1.2em; letter-spacing:0">SC</span>
+      <span>Scroll down</span>
+      <span class="numbox">↓</span>
+      <span><em>for</em> four recent projects</span>
+    </div>
+  </section>
+
+  <!-- work -->
+  <section id="work" class="table wrap">
+    <div class="head">
+      <h2 class="mix"><span class="g">Selected</span><span class="s">work</span><span class="p" style="font-size:.6em">04</span></h2>
+      <p>Four recent projects. Hover a flyer to straighten it, click to see the full project.</p>
+    </div>
+    <div class="ruler tiny" style="margin-bottom:36px" aria-label="Project timeline, 2024 to 2026">
+      <b style="left:4%">2024</b><b style="left:50%">2025</b><b style="left:96%">2026</b>
+      <i style="left:10%"></i><i style="left:46%"></i><i style="left:54%"></i><i style="left:90%"></i>
+    </div>
+    <div class="flyers">
+      <a class="flyer f-burst" href="#work">
+        <div class="fx" aria-hidden="true"></div>
+        <span class="go" aria-hidden="true">↗</span>
+        <div><h3>Maré<br>Seafood</h3>
+          <ul><li>Logo</li><li>Colour palette</li><li>Menus</li><li>Signage</li><li>Website</li></ul></div>
+        <div class="bot"><span class="big">Brand +<br>Web</span><span class="tiny">Porto<br>2026</span></div>
+      </a>
+      <a class="flyer f-hex" href="#work">
+        <div class="fx" aria-hidden="true"></div>
+        <span class="go" aria-hidden="true">↗</span>
+        <div><h3>Olaria<br>Nova</h3>
+          <ul><li>New logo</li><li>Typography</li><li>Packaging</li><li>Brand guide</li></ul></div>
+        <div class="bot"><span class="big">Rebrand</span><span class="tiny">Ceramics<br>2025</span></div>
+      </a>
+      <a class="flyer f-wave" href="#work">
+        <div class="fx" aria-hidden="true">
+          <svg viewBox="0 0 200 120" style="top:38%"><path id="w1" d="M0 30 Q50 0 100 30 T200 30 V120 H0 Z"/></svg>
+          <svg viewBox="0 0 200 120" style="top:66%"><path id="w2" d="M0 30 Q50 0 100 30 T200 30 V120 H0 Z"/></svg>
+        </div>
+        <span class="go" aria-hidden="true">↗</span>
+        <div><h3>Fólio<br>Books</h3>
+          <ul><li>Site map</li><li>Page designs</li><li>Mobile views</li><li>Prototype</li></ul></div>
+        <div class="bot"><span class="big">Web<br>design</span><span class="tiny">Publisher<br>2025</span></div>
+      </a>
+      <a class="flyer f-sun" href="#work">
+        <div class="fx" aria-hidden="true"></div>
+        <span class="go" aria-hidden="true">↗</span>
+        <div><h3>Ritmo<br>Festival</h3>
+          <ul><li>Identity</li><li>Posters</li><li>Tickets</li><li>Social kit</li><li>Website</li></ul></div>
+        <div class="bot"><span class="big">Brand +<br>Web</span><span class="tiny">Lisbon<br>2024</span></div>
+      </a>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="tr"><span class="p">Brand identity</span><span class="s">/</span><span class="g">Web design</span><span class="s">/</span><span class="p">Portugal</span><span class="s">/</span><span class="g">Worldwide</span><span class="s">/</span><span class="p">Brand identity</span><span class="s">/</span><span class="g">Web design</span><span class="s">/</span><span class="p">Portugal</span><span class="s">/</span><span class="g">Worldwide</span><span class="s">/</span><span class="p">Brand identity</span><span class="s">/</span><span class="g">Web design</span><span class="s">/</span><span class="p">Portugal</span><span class="s">/</span><span class="g">Worldwide</span><span class="s">/</span><span class="p">Brand identity</span><span class="s">/</span><span class="g">Web design</span><span class="s">/</span><span class="p">Portugal</span><span class="s">/</span><span class="g">Worldwide</span><span class="s">/</span></div></div>
+
+  <!-- services -->
+  <section id="services" class="svc-band wrap">
+    <div class="head">
+      <h2 class="mix"><span class="g">Two things,</span><span class="br"></span><span class="s">done well</span><span class="tag">Brand identity<br>+ Web design<br>Delivered in Figma</span></h2>
+      <p>I focus on two services so every project gets my full attention.</p>
+    </div>
+    <div class="svcs">
+      <div class="svc">
+        <div class="t"><span class="numbox">01</span><h3>Brand<br><span class="serif">identity</span></h3></div>
+        <div class="io1 tiny"><span>In</span>Your business and goals<svg class="ic" style="width:26px;height:12px"><use href="#s-arr"/></svg><span>Out</span>A complete brand</div>
+        <p>How your business looks, everywhere. From the logo to the rules that keep it consistent.</p>
+        <ul>
+          <li>Logo and symbol <span class="tiny">Core</span></li>
+          <li>Colours and typography <span class="tiny">Core</span></li>
+          <li>Brand guidelines <span class="tiny">Core</span></li>
+          <li>Social media and print templates <span class="tiny">Add-on</span></li>
+          <li>Packaging and signage <span class="tiny">Add-on</span></li>
+        </ul>
+      </div>
+      <div class="svc">
+        <div class="t"><span class="numbox">02</span><h3>Web<br><span class="serif">design</span></h3></div>
+        <div class="io1 tiny"><span>In</span>Your content and brand<svg class="ic" style="width:26px;height:12px"><use href="#s-arr"/></svg><span>Out</span>A website, ready to build</div>
+        <p>Websites designed screen by screen in Figma, ready for a developer to build.</p>
+        <ul>
+          <li>Site structure <span class="tiny">Core</span></li>
+          <li>Design for every page <span class="tiny">Core</span></li>
+          <li>Desktop and mobile versions <span class="tiny">Core</span></li>
+          <li>Clickable prototype <span class="tiny">Core</span></li>
+          <li>Handoff files for your developer <span class="tiny">Core</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">
+      <span class="stamp" aria-hidden="true"><span class="hex"></span><svg viewBox="0 0 100 100"><defs><path id="c1" d="M50,50 m-33,0 a33,33 0 1,1 66,0 a33,33 0 1,1 -66,0"/></defs><text><textPath href="#c1">Figma files · Ready to build · Figma files · Ready to build ·</textPath></text></svg><b>Ready<br>to build</b></span>
+      <p><b>Ready for your developer.</b> You get finished design files that any developer can build from. Need a developer? I can recommend one.</p>
+    </div>
+  </section>
+
+  <!-- process -->
+  <section id="process" class="wrap">
+    <div class="head">
+      <h2>How it <span class="serif">works</span></h2>
+      <p>Three steps, from first message to final files.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="regs" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div class="top"><span class="numbox">1</span><span class="mix" style="font-size:clamp(26px,2.6vw,40px)"><span class="p">talk</span></span></div><div><div class="smeta tiny"><span class="hatch"></span><span>Call</span><svg class="ic" style="width:22px;height:11px"><use href="#s-arr"/></svg><span>Proposal</span><span class="circ" style="margin-left:auto">01</span></div><h3>We talk</h3><p>A short call about your project, your goals and your timeline. Then I send you a clear proposal and price.</p></div></div>
+      <div class="step"><span class="regs" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div class="top"><span class="numbox">2</span><span class="mix" style="font-size:clamp(26px,2.6vw,40px)"><span class="p">make</span></span></div><div><div class="smeta tiny"><span class="hatch"></span><span>Concept</span><svg class="ic" style="width:22px;height:11px"><use href="#s-arr"/></svg><span>Feedback</span><span class="circ" style="margin-left:auto">02</span></div><h3>I design</h3><p>I present a first direction, then we refine it together through rounds of feedback.</p></div></div>
+      <div class="step"><span class="regs" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div class="top"><span class="numbox">3</span><span class="mix" style="font-size:clamp(26px,2.6vw,40px)"><span class="p">send</span></span></div><div><div class="smeta tiny"><span class="hatch"></span><span>Files</span><svg class="ic" style="width:22px;height:11px"><use href="#s-arr"/></svg><span>Guide</span><span class="circ" style="margin-left:auto">03</span></div><h3>You get the files</h3><p>Everything you need, organised and ready to use, plus a guide on how to use it.</p></div></div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section id="about" class="wrap">
+    <div class="head">
+      <h2>About <span class="serif">me</span></h2>
+      <p>The person behind the work.</p>
+    </div>
+    <div class="about">
+      <div class="portrait" aria-label="Portrait">
+        <div class="liquid"></div>
+        <span class="regs" style="color:#fff" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="cap tiny" style="right:34px; top:34px">Fig. 01<br>Samuel Cordeiro</span>
+        <span class="barcode" data-seed="21" style="position:absolute; right:34px; bottom:34px; color:#fff; z-index:2"></span>
+        <span class="numbox">SC</span>
+      </div>
+      <div class="about-r">
+        <h2 class="mix"><span class="g">Hi, I’m</span><span class="s">( Samuel )</span></h2>
+        <p>I’m a brand and web designer based in Portugal. I help small businesses and studios look as good as the work they do.</p>
+        <div class="spec">
+          <div><span class="tiny">Based in</span><span class="dots"></span><b>Portugal</b></div>
+          <div><span class="tiny">I design</span><span class="dots"></span><b>Brands and websites</b></div>
+          <div><span class="tiny">I work with</span><span class="dots"></span><b>Clients worldwide</b></div>
+          <div><span class="tiny">I reply</span><span class="dots"></span><b>Within 24 hours</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact" class="contact wrap">
+    <div class="fx" aria-hidden="true"></div>
+    <h2>Have a<br>project <span class="serif">in mind?</span></h2>
+    <p class="sub">Send me an email with a few lines about it. I reply within 24 hours.</p>
+    <div class="mail" id="mail">ccordeiro.samuel@gmail.com</div>
+    <div class="row">
+      <button class="copy" id="copy" type="button">Copy email</button>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram <span>↗</span></a>
+      <a href="https://www.behance.net/" target="_blank" rel="noopener">Behance <span>↗</span></a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <span>↗</span></a>
+    </div>
+    <div class="strip2 tiny" style="margin:0">
+      <span class="dot4" aria-hidden="true"></span>
+      <span>Open for new projects<br>Replies within 24 hours</span>
+      <span class="circs"><span class="circ" id="cd2">--</span><span class="circ" id="cm2">--</span></span>
+      <span class="grow" style="text-align:right">Samuel Cordeiro<br>Brand &amp; web designer, Portugal</span>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span class="big mix" style="gap:.1em .3em"><span>Samuel Cordeiro</span><span class="p" style="font-size:1.2em">SC</span><span>Brand &amp; Web</span><span class="numbox" id="yy2" style="background:#fff;color:#0B0B0C;font-size:1.6em">26</span><em>at</em><span>Portugal</span></span>
+  <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span>
+  <a class="tiny" href="#top">Back to top ↑</a>
+</footer>
+
+<div class="paper" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite">Email copied</div>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Date bits (Lisbon)
+  let d = new Date(), day = d.getDate(), mon = d.getMonth()+1, yr = d.getFullYear();
+  try{
+    const p = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'numeric',year:'numeric',timeZone:'Europe/Lisbon'}).formatToParts(d);
+    day = +p.find(x=>x.type==='day').value; mon = +p.find(x=>x.type==='month').value; yr = +p.find(x=>x.type==='year').value;
+  }catch(e){}
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('cd').textContent = pad(day);
+  document.getElementById('cm').textContent = pad(mon);
+  document.getElementById('yy').textContent = String(yr).slice(-2);
+  document.getElementById('yr').textContent = yr;
+  const len = new Date(yr, mon, 0).getDate(), days = document.getElementById('days');
+  for(let i=1;i<=len;i++){ const s = document.createElement('span'); s.textContent = i; if(i===day) s.className='today'; days.appendChild(s); }
+  // barcodes
+  document.querySelectorAll('.barcode').forEach(el=>{
+    let seed = +el.dataset.seed || 1; const r = ()=> (seed = seed*16807 % 2147483647) / 2147483647;
+    let x = 0; const parts = [];
+    while(x < 100){ const w = .8 + r()*3.4, g = .9 + r()*3; parts.push('currentColor '+x.toFixed(1)+'% '+(x+w).toFixed(1)+'%', 'transparent '+(x+w).toFixed(1)+'% '+(x+w+g).toFixed(1)+'%'); x += w+g; }
+    el.style.background = 'linear-gradient(90deg,' + parts.join(',') + ')';
+  });
+  document.getElementById('cd2').textContent = pad(day);
+  document.getElementById('cm2').textContent = pad(mon);
+  document.getElementById('yy2').textContent = String(yr).slice(-2);
+  document.getElementById('pin').style.left = ((day-.5)/len*100) + '%';
+
+  // Op-art: concentric checkered rings, alternate rings counter-rotate
+  const cv = document.getElementById('op'), ctx = cv.getContext('2d');
+  let W=0, H=0, running = true, t = 0;
+  function size(){
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    draw();
+  }
+  function draw(){
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0,0,W,H);
+    ctx.save();
+    ctx.translate(W/2, H*0.54);
+    ctx.scale(1, 0.62);
+    const maxR = Math.hypot(W/2, H/0.62) * 0.75;
+    const seg = 56;
+    ctx.fillStyle = '#0B0B0C';
+    let r = 4, i = 0;
+    while(r < maxR){
+      const step = 6 + r*0.085;
+      const r2 = r + step;
+      const off = (i%2 ? 1 : -1) * t * (0.12 + i*0.004);
+      for(let j=0;j<seg;j++){
+        if((i+j)%2) continue;
+        const a0 = off + j*2*Math.PI/seg, a1 = a0 + 2*Math.PI/seg;
+        ctx.beginPath(); ctx.arc(0,0,r2,a0,a1); ctx.arc(0,0,r,a1,a0,true); ctx.closePath(); ctx.fill();
+      }
+      r = r2; i++;
+    }
+    ctx.restore();
+  }
+  size();
+  let rs; addEventListener('resize', ()=>{ clearTimeout(rs); rs = setTimeout(size, 150); });
+  if(!reduce){
+    if('IntersectionObserver' in window){ new IntersectionObserver(es=>{ running = es[0].isIntersecting; }).observe(cv); }
+    let last = performance.now();
+    (function loop(now){
+      const dt = Math.min(50, now-last); last = now;
+      if(running){ t += dt/1000 * 0.35; draw(); }
+      requestAnimationFrame(loop);
+    })(last);
+  }
+
+  // Pink waves breathe
+  const w1 = document.getElementById('w1'), w2 = document.getElementById('w2');
+  function wave(p, ph, amp){
+    let s = 'M0 ' + (30 + Math.sin(ph)*amp).toFixed(1);
+    for(let x=10;x<=200;x+=10){ s += ' L' + x + ' ' + (30 + Math.sin(ph + x/26)*amp).toFixed(1); }
+    p.setAttribute('d', s + ' V120 H0 Z');
+  }
+  wave(w1, 0, 14); wave(w2, 2, 10);
+  if(!reduce){ (function loop(n){ wave(w1, n/900, 14); wave(w2, n/700 + 2, 10); requestAnimationFrame(loop); })(0); }
+
+  // Copy email
+  const btn = document.getElementById('copy'), toast = document.getElementById('toast'), mail = document.getElementById('mail');
+  function show(m){ toast.textContent = m; toast.classList.add('show'); clearTimeout(show.t); show.t = setTimeout(()=>toast.classList.remove('show'), 1800); }
+  function sel(){ const r = document.createRange(); r.selectNodeContents(mail); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  btn.addEventListener('click', ()=>{
+    try{ navigator.clipboard.writeText(mail.textContent.trim()).then(()=>show('Email copied'), ()=>{ sel(); show('Email selected, press ⌘C to copy'); }); }
+    catch(e){ sel(); show('Email selected, press ⌘C to copy'); }
+  });
+})();
+</script>
+
+</body>
+</html>
