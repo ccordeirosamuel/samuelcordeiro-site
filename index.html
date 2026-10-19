@@ -78,7 +78,7 @@ a{color:inherit; text-decoration:none}
 .bar .cta{background:var(--yellow); color:var(--black); padding:6px 12px; font-weight:600; font-size:13px; border-radius:999px; display:inline-flex; align-items:center; transition:background .6s cubic-bezier(.76,0,.24,1), padding .6s cubic-bezier(.76,0,.24,1)}
 .bar .cta .cta-arr{display:inline-block; max-width:0; opacity:0; overflow:hidden; transform:translateX(-8px); transition:max-width .6s cubic-bezier(.76,0,.24,1), opacity .45s cubic-bezier(.76,0,.24,1), transform .6s cubic-bezier(.76,0,.24,1), margin .6s cubic-bezier(.76,0,.24,1)}
 .bar .cta:hover .cta-arr, .bar .cta:focus-visible .cta-arr{max-width:1.2em; opacity:1; transform:none; margin-left:6px}
-.bar .cta:hover, .bar .cta:focus-visible{background:var(--magenta)}
+.bar .cta:hover, .bar .cta:focus-visible{background:var(--magenta); font-weight:800}
 
 /* liquid photo */
 .liquid-band{position:relative; overflow:hidden; height:clamp(220px, 32vw, 460px); margin-top:var(--hdr, 52px); background:#9EA3B8}
@@ -95,18 +95,15 @@ a{color:inherit; text-decoration:none}
 .liquid-band .numbox{position:absolute; left:50%; top:0; transform:translateX(-50%); font-size:clamp(56px, 8vw, 120px); z-index:2}
 
 /* black poster band */
+.band{position:relative; overflow-x:clip} .band .name{position:relative} #nameFx{position:absolute; pointer-events:none; z-index:2}
 .band{background:var(--black); color:var(--white); padding-block:clamp(18px,2.4vw,32px) clamp(14px,1.6vw,22px); display:grid; gap:clamp(10px,1.4vw,18px)}
 .band .r1, .band .r2{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.1em .35em; line-height:.92}
 .band .name{font-weight:700; letter-spacing:-.06em; font-size:clamp(44px, 8.2vw, 136px)}
-.arrows{display:inline-grid; grid-template-columns:max-content; font-family:var(--serif); font-size:clamp(18px, 2.7vw, 44px); line-height:.95; row-gap:.08em}
-/* Branding ─┐  then  Web Design ←┘ : two hairline elbows sharing one right edge */
-.ar-row{display:flex; align-items:flex-start; gap:.18em}
-.ar1, .ar2{flex:1 1 auto; min-width:1.4em; position:relative; border:0 solid currentColor}
-.ar1{height:.62em; margin-top:.36em; border-top-width:1.4px; border-right-width:1.4px}
-.ar2{height:.55em; margin-top:-.06em; border-bottom-width:1.4px; border-right-width:1.4px}
-.ar2::before{content:""; position:absolute; left:1px; bottom:-.17em; width:.32em; height:.32em; border-left:1.4px solid currentColor; border-bottom:1.4px solid currentColor; transform:rotate(45deg); transform-origin:center}
+.arrows{display:inline-grid; grid-template-columns:auto auto; align-items:center; font-family:var(--serif); font-size:clamp(18px, 2.7vw, 44px); line-height:.95; column-gap:.12em}
+.arrows svg{width:1.6em; height:.8em; overflow:visible}
+.arrows svg:nth-of-type(2){justify-self:end}
 .dotted{display:inline-flex; align-items:center; font-family:var(--serif); font-size:clamp(40px, 7.4vw, 124px); letter-spacing:-.03em}
-.dotted svg{width:.62em; height:.62em; margin:0 -.045em 0 -.06em; transform:translateY(.05em)}
+.dotted svg{width:.62em; height:.62em; margin:0 -.045em 0 .01em; transform:translateY(-.018em)}
 .dotted svg circle{animation:spin 18s linear infinite; transform-origin:50% 50%}
 @keyframes spin{to{transform:rotate(360deg)}}
 .paren{font-family:var(--serif); font-size:clamp(40px, 7.4vw, 124px); letter-spacing:-.03em; display:inline-flex; align-items:center; gap:.2em}
@@ -580,8 +577,10 @@ html.loading, html.loading body{overflow:hidden}
     <div class="r1">
       <h1 class="name" style="margin:0" aria-label="Samuel Cordeiro"><span>Samuel</span><span class="nsc" aria-hidden="true">SC</span><span>Cordeiro</span></h1>
       <span class="arrows" aria-label="Branding and web design">
-        <span class="ar-row"><span>Branding</span><i class="ar1" aria-hidden="true"></i></span>
-        <span class="ar-row"><span>Web Design</span><i class="ar2" aria-hidden="true"></i></span>
+        <span>Branding</span>
+        <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M0 2 H34 V16" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M30 12 L34 18 L38 12" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M6 18 V4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2 8 L6 2 L10 8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 18 H40" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        <span>Web Design</span>
       </span>
       <span class="dotted" aria-label="Portugal">P<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="0 5.3407"/></svg>rtugal</span>
     </div>
@@ -789,7 +788,7 @@ html.loading, html.loading body{overflow:hidden}
 
 <footer class="wrap">
   <span class="big mix" style="gap:.1em .3em"><span>Samuel Cordeiro</span><span class="p" style="font-size:1.2em;color:var(--yellow)">SC</span><span>Brand &amp; Web</span><span class="numbox" id="yy2" style="background:#fff;color:#0B0B0C;font-size:1.5em;font-family:var(--pixel);font-weight:400;letter-spacing:0;line-height:1;padding:.08em .22em .02em">2K26</span><em>based in</em><span>Portugal</span></span>
-  <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span><span class="tiny" style="opacity:.5">b7.4</span>
+  <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span><span class="tiny" style="opacity:.5">b7.5</span>
   <a class="tiny" href="#top">Back to top ↑</a>
 </footer>
 
@@ -842,24 +841,32 @@ html.loading, html.loading body{overflow:hidden}
   document.getElementById('yy2').textContent = '2K' + String(yr).slice(-2);
   document.getElementById('pin').style.left = ((day-.5)/len*100) + '%';
 
-  // Op-art: concentric checkered rings, alternate rings counter-rotate
+  // Op-art: concentric checkered rings, alternate rings counter-rotate; hover = portrait's dot/pixel field + tablecloth pull
   const cv = document.getElementById('op'), ctx = cv.getContext('2d');
-  let W=0, H=0, running = true, t = 0;
+  const buf = document.createElement('canvas'), bx = buf.getContext('2d'), sm = document.createElement('canvas'), sx = sm.getContext('2d', {willReadFrequently:true});
+  let W=0, H=0, dpr=1, running = true, t = 0;
+  let C = 10, cols = 0, rows = 0, cells = [], energy = 0, inside = false, lastX = null, lastY = null, pullX = -1e4, pullY = -1e4;
+  const GX = 16, GY = 10; let V = [];
   function size(){
-    const dpr = Math.min(2, devicePixelRatio || 1);
+    dpr = Math.min(2, devicePixelRatio || 1);
     W = cv.clientWidth; H = cv.clientHeight;
-    cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    draw();
+    cv.width = buf.width = Math.round(W*dpr); cv.height = buf.height = Math.round(H*dpr);
+    C = Math.max(8, Math.round(W / 90)); cols = Math.ceil(W / C); rows = Math.ceil(H / C); sm.width = cols; sm.height = rows;
+    const old = cells; cells = [];
+    for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) cells.push({x:c*C, y:r*C, e:0, n:Math.random(), ph:Math.random()*6.2832, col: Math.random() < .075 ? (Math.random() < .5 ? '#FF22D3' : '#F6F21C') : null});
+    energy = 0;
+    V = []; for(let j=0;j<=GY;j++) for(let i=0;i<=GX;i++) V.push({x:i*W/GX, y:j*H/GY, dx:0, dy:0, vx:0, vy:0, edge: i===0 || j===0 || i===GX || j===GY});
+    render();
   }
-  function draw(){
-    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0,0,W,H);
-    ctx.save();
-    ctx.translate(W/2, H*0.54);
-    ctx.scale(1, 0.62);
+  function rings(){
+    bx.setTransform(dpr,0,0,dpr,0,0);
+    bx.fillStyle = '#FFFFFF'; bx.fillRect(0,0,W,H);
+    bx.save();
+    bx.translate(W/2, H*0.54);
+    bx.scale(1, 0.62);
     const maxR = Math.hypot(W/2, H/0.62) * 0.75;
     const seg = 56;
-    ctx.fillStyle = '#0B0B0C';
+    bx.fillStyle = '#0B0B0C';
     let r = 4, i = 0;
     while(r < maxR){
       const step = 6 + r*0.085;
@@ -868,11 +875,72 @@ html.loading, html.loading body{overflow:hidden}
       for(let j=0;j<seg;j++){
         if((i+j)%2) continue;
         const a0 = off + j*2*Math.PI/seg, a1 = a0 + 2*Math.PI/seg;
-        ctx.beginPath(); ctx.arc(0,0,r2,a0,a1); ctx.arc(0,0,r,a1,a0,true); ctx.closePath(); ctx.fill();
+        bx.beginPath(); bx.arc(0,0,r2,a0,a1); bx.arc(0,0,r,a1,a0,true); bx.closePath(); bx.fill();
       }
       r = r2; i++;
     }
-    ctx.restore();
+    bx.restore();
+  }
+  function field(){
+    sx.drawImage(buf, 0, 0, cols, rows);
+    const px = sx.getImageData(0, 0, cols, rows).data, tm = performance.now() / 1000;
+    for(let k=0;k<cells.length;k++){
+      const c = cells[k]; if(c.e < .02) continue;
+      const l = px[k*4] / 255, tt = c.e + (c.n - .5) * .45;
+      const jx = Math.sin(tm * 2.3 + c.ph) * C * .14 * Math.min(1, c.e), jy = Math.cos(tm * 1.9 + c.ph * 1.3) * C * .14 * Math.min(1, c.e);
+      const cx = c.x + C/2 + jx, cy = c.y + C/2 + jy;
+      if(tt > .62){
+        bx.fillStyle = '#FFFFFF'; bx.fillRect(c.x, c.y, C, C);
+        const r = (1 - l) * C * .58 * (.85 + .15 * Math.sin(tm * 3 + c.ph)); if(r > .3 || c.col){ bx.fillStyle = c.col || '#0B0B0C'; bx.beginPath(); bx.arc(cx, cy, c.col ? Math.max(r, C*.32) : r, 0, 6.2832); bx.fill(); }
+      } else if(tt > .34){
+        const g = Math.round(Math.round(l * 5) / 5 * 245 + 10); bx.fillStyle = c.col || `rgb(${g},${g},${g})`; bx.fillRect(c.x, c.y, C, C);
+        const r = (1 - l) * C * .3; if(r > .3){ bx.fillStyle = l > .5 ? '#0B0B0C' : '#FFFFFF'; bx.beginPath(); bx.arc(cx, cy, r, 0, 6.2832); bx.fill(); }
+      } else if(tt > .1 && c.n < tt * 2.2){
+        const g = Math.round(Math.round(l * 4) / 4 * 245 + 10), sz = C * (.35 + c.n * .4);
+        bx.fillStyle = c.col || `rgb(${g},${g},${g})`; bx.fillRect(c.x + (C - sz) * c.n + jx * 1.6, c.y + (C - sz) * (1 - c.n) + jy * 1.6, sz, sz);
+      }
+    }
+  }
+  function tri(x0,y0,x1,y1,x2,y2,u0,v0,u1,v1,u2,v2){
+    // clip grown ~1px past the centroid so neighbouring triangles overlap (no hairline seams)
+    const mx = (x0+x1+x2)/3, my = (y0+y1+y2)/3, g = p => { const l = Math.hypot(p[0]-mx, p[1]-my) || 1; return [p[0] + (p[0]-mx)/l, p[1] + (p[1]-my)/l]; };
+    const A = g([x0,y0]), B = g([x1,y1]), Q = g([x2,y2]);
+    ctx.save(); ctx.beginPath(); ctx.moveTo(A[0],A[1]); ctx.lineTo(B[0],B[1]); ctx.lineTo(Q[0],Q[1]); ctx.closePath(); ctx.clip();
+    const den = u0*(v1-v2) + u1*(v2-v0) + u2*(v0-v1); if(!den){ ctx.restore(); return; }
+    const a = (x0*(v1-v2) + x1*(v2-v0) + x2*(v0-v1)) / den, b = (y0*(v1-v2) + y1*(v2-v0) + y2*(v0-v1)) / den;
+    const c = (x0*(u2-u1) + x1*(u0-u2) + x2*(u1-u0)) / den, dd = (y0*(u2-u1) + y1*(u0-u2) + y2*(u1-u0)) / den;
+    const e = (x0*(u1*v2-u2*v1) + x1*(u2*v0-u0*v2) + x2*(u0*v1-u1*v0)) / den, f = (y0*(u1*v2-u2*v1) + y1*(u2*v0-u0*v2) + y2*(u0*v1-u1*v0)) / den;
+    // only copy the patch of the buffer this triangle needs
+    const sx0 = Math.max(0, Math.min(u0,u1,u2) - 24), sy0 = Math.max(0, Math.min(v0,v1,v2) - 24), sx1 = Math.min(W, Math.max(u0,u1,u2) + 24), sy1 = Math.min(H, Math.max(v0,v1,v2) + 24);
+    ctx.transform(a, b, c, dd, e, f); ctx.drawImage(buf, sx0*dpr, sy0*dpr, (sx1-sx0)*dpr, (sy1-sy0)*dpr, sx0, sy0, sx1-sx0, sy1-sy0); ctx.restore();
+  }
+  function render(){
+    rings();
+    if(energy > .004){
+      const keep = inside ? .985 : .94; let m = 0;
+      for(const c of cells){ if(c.e){ c.e *= keep; if(c.e < .01) c.e = 0; else if(c.e > m) m = c.e; } }
+      energy = m; if(energy > .004) field();
+    }
+    const sig = 2 * Math.pow(Math.max(W, H) * .2, 2); let warped = false;
+    for(const v of V){
+      if(v.edge) continue;
+      const ddx = pullX - v.x, ddy = pullY - v.y, dist = Math.hypot(ddx, ddy);
+      const amt = Math.min(dist * .07, 18) * Math.exp(-(dist*dist) / sig);
+      const tx = dist ? ddx / dist * amt : 0, ty = dist ? ddy / dist * amt : 0;
+      v.vx = (v.vx + (tx - v.dx) * .09) * .8; v.vy = (v.vy + (ty - v.dy) * .09) * .8;
+      v.dx += v.vx; v.dy += v.vy;
+      if(Math.abs(v.dx) + Math.abs(v.dy) > .08) warped = true;
+    }
+    ctx.setTransform(1,0,0,1,0,0); ctx.drawImage(buf, 0, 0);
+    if(warped){
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      for(let j=0;j<GY;j++) for(let i=0;i<GX;i++){
+        const a = V[j*(GX+1)+i], b = V[j*(GX+1)+i+1], c = V[(j+1)*(GX+1)+i], e = V[(j+1)*(GX+1)+i+1];
+        if(Math.abs(a.dx)+Math.abs(a.dy)+Math.abs(b.dx)+Math.abs(b.dy)+Math.abs(c.dx)+Math.abs(c.dy)+Math.abs(e.dx)+Math.abs(e.dy) < .6) continue;
+        tri(a.x+a.dx,a.y+a.dy, b.x+b.dx,b.y+b.dy, c.x+c.dx,c.y+c.dy, a.x,a.y, b.x,b.y, c.x,c.y);
+        tri(b.x+b.dx,b.y+b.dy, e.x+e.dx,e.y+e.dy, c.x+c.dx,c.y+c.dy, b.x,b.y, e.x,e.y, c.x,c.y);
+      }
+    }
   }
   size();
   let rs; addEventListener('resize', ()=>{ clearTimeout(rs); rs = setTimeout(size, 150); });
@@ -881,9 +949,38 @@ html.loading, html.loading body{overflow:hidden}
     let last = performance.now();
     (function loop(now){
       const dt = Math.min(50, now-last); last = now;
-      if(running){ t += dt/1000 * 0.35; draw(); }
+      if(running){ t += dt/1000 * 0.35; try{ render(); }catch(err){} }
       requestAnimationFrame(loop);
     })(last);
+    const track = (cx, cy) => {
+      const r = cv.getBoundingClientRect(), x = cx - r.left, y = cy - r.top;
+      inside = x >= 0 && y >= 0 && x <= r.width && y <= r.height;
+      if(inside && cells.length){
+        const sp = lastX === null ? 0 : Math.hypot(x - lastX, y - lastY), amt = Math.min(1, sp / 36) * .32;
+        if(amt > .002){
+          const R = Math.max(80, W * .09) * (1 + Math.min(1, sp / 60) * .4);
+          const c0 = Math.max(0, Math.floor((x - R*1.4) / C)), c1 = Math.min(cols-1, Math.ceil((x + R*1.4) / C));
+          const r0 = Math.max(0, Math.floor((y - R*1.4) / C)), r1 = Math.min(rows-1, Math.ceil((y + R*1.4) / C));
+          for(let rr=r0; rr<=r1; rr++) for(let cc=c0; cc<=c1; cc++){
+            const c = cells[rr*cols+cc], dx = c.x + C/2 - x, dy = c.y + C/2 - y, dd = Math.hypot(dx, dy);
+            const rad = R * (1 + .35 * Math.sin(Math.atan2(dy, dx) * 3 + c.n * 2 + performance.now() / 700)); if(dd > rad) continue;
+            c.e = Math.min(1.4, c.e + amt * Math.pow(1 - dd / rad, 1.4) * (.6 + .8 * c.n));
+            if(c.e > energy) energy = c.e;
+          }
+        }
+      }
+      lastX = inside ? x : null; lastY = inside ? y : null;
+      if(inside){ pullX = x; pullY = y; } else { pullX = pullY = -1e4; }
+    };
+    const off = () => { inside = false; lastX = null; pullX = pullY = -1e4; };
+    if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+      addEventListener('pointermove', e => track(e.clientX, e.clientY), {passive:true});
+      document.addEventListener('pointerleave', off);
+    } else {
+      cv.addEventListener('pointerdown', e => track(e.clientX, e.clientY));
+      cv.addEventListener('pointermove', e => track(e.clientX, e.clientY));
+      cv.addEventListener('pointerup', off); cv.addEventListener('pointercancel', off);
+    }
   }
 
   // Pink waves breathe
@@ -1021,7 +1118,7 @@ html.loading, html.loading body{overflow:hidden}
       if(el._scr) return; el._scr = true;
       const isTitle = forceTitle || /^H[1-6]$/.test(el.tagName);
       const nodes = []; const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-      let n; while((n = w.nextNode())){ if(!n.textContent.trim()) continue; if(n.parentElement.closest(SKIP)) continue; nodes.push(n); }
+      let n; while((n = w.nextNode())){ if(!n.textContent.trim()) continue; const sk = n.parentElement.closest(SKIP); if(sk && sk !== el) continue; nodes.push(n); }
       const parts = [], chars = [];
       nodes.forEach(n => {
         const holder = document.createElement('span'); holder.className = 'sch';
@@ -1316,6 +1413,84 @@ html.loading, html.loading body{overflow:hidden}
       const off = () => { inside = false; lastX = null; pullX = pullY = -1e4; kick(); };
       host.addEventListener('pointerup', off); host.addEventListener('pointercancel', off);
     }
+  })();
+
+  // hero name: hovering a word re-runs its decode; the pointer leaves a dot/pixel smear like the portrait
+  (function(){
+    const h1 = document.querySelector('.band .name'); if(!h1 || reduce) return;
+    const words = [...h1.children];
+    words.forEach(w => w.addEventListener('pointerenter', () => { if(window.__decode) window.__decode(w, true); }));
+    if(!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    const band = h1.closest('.band'), cv = document.createElement('canvas'); cv.id = 'nameFx'; cv.setAttribute('aria-hidden','true'); band.appendChild(cv);
+    const x = cv.getContext('2d'), PAD = 30; let W, H, d, C, cols, rows, cells = [], ox = 0, oy = 0, energy = 0, raf = 0, lx = null, ly = null, inside = false;
+    function build(){
+      const br = band.getBoundingClientRect(), hr = h1.getBoundingClientRect();
+      ox = hr.left - br.left - PAD; oy = hr.top - br.top - PAD; W = hr.width + 2*PAD; H = hr.height + 2*PAD; d = Math.min(2, devicePixelRatio || 1);
+      Object.assign(cv.style, {left: ox + 'px', top: oy + 'px', width: W + 'px', height: H + 'px'});
+      cv.width = Math.round(W*d); cv.height = Math.round(H*d);
+      // rasterise the name into a mask so the smear follows the letters
+      const m = document.createElement('canvas'); m.width = Math.ceil(W); m.height = Math.ceil(H); const mx = m.getContext('2d');
+      mx.fillStyle = '#fff'; mx.textBaseline = 'middle';
+      words.forEach(w => {
+        const r = w.getBoundingClientRect(), cs = getComputedStyle(w);
+        mx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+        try{ mx.letterSpacing = cs.letterSpacing; }catch(e){}
+        mx.fillText(cs.textTransform === 'uppercase' ? w.textContent.toUpperCase() : w.textContent, r.left - hr.left + PAD, r.top - hr.top + PAD + r.height/2);
+      });
+      C = Math.max(6, Math.round(hr.height / 22)); cols = Math.ceil(W / C); rows = Math.ceil(H / C);
+      const md = mx.getImageData(0, 0, m.width, m.height).data; cells = [];
+      for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+        let a = 0, n = 0;
+        for(let yy = r*C; yy < Math.min(m.height, (r+1)*C); yy += 2) for(let xx = c*C; xx < Math.min(m.width, (c+1)*C); xx += 2){ a += md[(yy*m.width+xx)*4+3]; n++; }
+        const cov = n ? a / n / 255 : 0;
+        cells.push({x:c*C, y:r*C, cov, e:0, n:Math.random(), ph:Math.random()*6.2832, col: Math.random() < .075 ? (Math.random() < .5 ? '#FF22D3' : '#F6F21C') : null});
+      }
+    }
+    function frame(){
+      raf = 0; x.setTransform(d,0,0,d,0,0); x.clearRect(0,0,W,H);
+      if(energy < .004) return;
+      const keep = inside ? .985 : .93, tm = performance.now() / 1000; let mxE = 0;
+      for(const c of cells){
+        if(!c.e) continue; c.e *= keep; if(c.e < .01){ c.e = 0; continue; } if(c.e > mxE) mxE = c.e;
+        if(c.cov < .05 && c.n > c.e * .9) continue;
+        const t = c.e + (c.n - .5) * .45, j = C * .16 * Math.min(1, c.e);
+        const cx = c.x + C/2 + Math.sin(tm*2.3 + c.ph) * j, cy = c.y + C/2 + Math.cos(tm*1.9 + c.ph*1.3) * j;
+        if(t > .62){
+          x.fillStyle = '#0B0B0C'; x.fillRect(c.x, c.y, C, C);
+          const r = Math.max(c.col ? C*.3 : 0, c.cov * C * .55); if(r > .3){ x.fillStyle = c.col || '#FFFFFF'; x.beginPath(); x.arc(cx, cy, r, 0, 6.2832); x.fill(); }
+        } else if(t > .34){
+          x.fillStyle = '#0B0B0C'; x.fillRect(c.x, c.y, C, C);
+          if(c.cov > .15){ const g = Math.round(Math.round(c.cov * 4) / 4 * 255); x.fillStyle = c.col || `rgb(${g},${g},${g})`; x.fillRect(c.x + 1, c.y + 1, C - 2, C - 2); }
+        } else if(t > .1 && c.cov > .2 && c.n < t * 2.2){
+          const sz = C * (.3 + c.n * .4); x.fillStyle = c.col || '#FFFFFF'; x.fillRect(c.x + (C - sz) * c.n + j*1.6, c.y + (C - sz) * (1 - c.n) + j*1.4, sz, sz);
+        }
+      }
+      energy = mxE; if(energy > .004) raf = requestAnimationFrame(frame);
+    }
+    const kick = () => { if(!raf) raf = requestAnimationFrame(frame); };
+    addEventListener('pointermove', e => {
+      if(!cells.length) return;
+      const r = cv.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top;
+      inside = px >= PAD*.5 && py >= PAD*.5 && px <= W - PAD*.5 && py <= H - PAD*.5;
+      if(inside && lx !== null){
+        const sp = Math.hypot(px - lx, py - ly), amt = Math.min(1, sp / 36) * .34;
+        if(amt > .002){
+          const R = Math.max(60, H * .55) * (1 + Math.min(1, sp / 60) * .4);
+          for(const c of cells){
+            const dx = c.x + C/2 - px, dy = c.y + C/2 - py, dd = Math.hypot(dx, dy);
+            const rr = R * (1 + .35 * Math.sin(Math.atan2(dy, dx) * 3 + c.n * 2 + performance.now() / 700)); if(dd > rr) continue;
+            c.e = Math.min(1.4, c.e + amt * Math.pow(1 - dd / rr, 1.4) * (.6 + .8 * c.n)); if(c.e > energy) energy = c.e;
+          }
+          kick();
+        }
+      }
+      lx = inside ? px : null; ly = inside ? py : null;
+      if(!inside && energy > .004) kick();
+    }, {passive:true});
+    const rebuild = () => { clearTimeout(rebuild.t); rebuild.t = setTimeout(build, 150); };
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(build);
+    document.addEventListener('loaderdone', () => setTimeout(build, 1400));
+    addEventListener('resize', rebuild);
   })();
   // Copy email
   const btn = document.getElementById('copy'), toast = document.getElementById('toast'), mail = document.getElementById('mail');
