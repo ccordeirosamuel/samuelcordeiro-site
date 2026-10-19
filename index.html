@@ -385,7 +385,7 @@ p, li, .tiny{text-wrap:pretty}
   <!-- hero: the poster -->
   <div class="liquid-band" aria-hidden="true">
     <div class="liquid"></div>
-    <span class="numbox" id="yy">26</span>
+    <span class="numbox" id="yy">2k26</span>
   </div>
 
   <section class="band wrap" aria-label="Intro">
@@ -583,7 +583,7 @@ p, li, .tiny{text-wrap:pretty}
 </main>
 
 <footer class="wrap">
-  <span class="big mix" style="gap:.1em .3em"><span>Samuel Cordeiro</span><span class="p" style="font-size:1.2em;color:var(--yellow)">SC</span><span>Brand &amp; Web</span><span class="numbox" id="yy2" style="background:#fff;color:#0B0B0C;font-size:1.5em;font-family:var(--pixel);font-weight:400;letter-spacing:0;line-height:1;padding:.08em .22em .02em">26</span><em>based in</em><span>Portugal</span></span>
+  <span class="big mix" style="gap:.1em .3em"><span>Samuel Cordeiro</span><span class="p" style="font-size:1.2em;color:var(--yellow)">SC</span><span>Brand &amp; Web</span><span class="numbox" id="yy2" style="background:#fff;color:#0B0B0C;font-size:1.5em;font-family:var(--pixel);font-weight:400;letter-spacing:0;line-height:1;padding:.08em .22em .02em">2k26</span><em>based in</em><span>Portugal</span></span>
   <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span>
   <a class="tiny" href="#top">Back to top ↑</a>
 </footer>
@@ -606,7 +606,7 @@ p, li, .tiny{text-wrap:pretty}
   const pad = n => String(n).padStart(2,'0');
   document.getElementById('cd').textContent = pad(day);
   document.getElementById('cm').textContent = pad(mon);
-  document.getElementById('yy').textContent = String(yr).slice(-2);
+  document.getElementById('yy').textContent = '2k' + String(yr).slice(-2);
   document.getElementById('yr').textContent = yr;
   const len = new Date(yr, mon, 0).getDate(), days = document.getElementById('days');
   for(let i=1;i<=len;i++){ const s = document.createElement('span'); s.textContent = i; if(i===day) s.className='today'; days.appendChild(s); }
@@ -634,7 +634,7 @@ p, li, .tiny{text-wrap:pretty}
   let tkr; addEventListener('resize', ()=>{ clearTimeout(tkr); tkr = setTimeout(fillTicker, 200); });
   document.getElementById('cd2').textContent = pad(day);
   document.getElementById('cm2').textContent = pad(mon);
-  document.getElementById('yy2').textContent = String(yr).slice(-2);
+  document.getElementById('yy2').textContent = '2k' + String(yr).slice(-2);
   document.getElementById('pin').style.left = ((day-.5)/len*100) + '%';
 
   // Op-art: concentric checkered rings, alternate rings counter-rotate
