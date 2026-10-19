@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -199,7 +199,7 @@ a{color:inherit; text-decoration:none}
 
 /* process */
 .steps{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:clamp(14px,2vw,30px); padding-bottom:clamp(40px,6vw,80px)}
-.step{background:var(--paper); padding:clamp(16px,1.8vw,26px); display:grid; gap:40px; align-content:space-between; min-height:clamp(220px, 22vw, 320px); position:relative; overflow:hidden; isolation:isolate}
+.step{background:var(--paper); padding:clamp(32px,2.6vw,40px); display:grid; gap:40px; align-content:space-between; min-height:clamp(220px, 22vw, 320px); position:relative; overflow:hidden; isolation:isolate}
 .step .numbox{--b:clamp(64px, 6vw, 92px); width:var(--b); height:var(--b); display:grid; place-items:center; padding:0; justify-self:start; font-family:var(--serif); font-weight:400; letter-spacing:0; line-height:1; font-size:calc(var(--b) * .5); font-variant-numeric:lining-nums}
 .step h3{margin:0; font-weight:700; letter-spacing:-.05em; font-size:clamp(26px,2.6vw,40px); line-height:.9}
 .step p{margin:.5em 0 0; font-weight:500; letter-spacing:-.02em; font-size:15px; max-width:32ch}
@@ -866,16 +866,16 @@ html.loading, html.loading body{overflow:hidden}
     document.querySelectorAll('template').forEach(t => collect(t.content));
     window.__t = k => (document.documentElement.lang === 'pt-PT' && PT[k]) || k;
     const btn = document.getElementById('langBtn');
-    function apply(lang){
+    function apply(lang, quiet){
       items.forEach(i => { i.n.textContent = lang === 'pt' ? i.pt : i.en; });
       document.documentElement.lang = lang === 'pt' ? 'pt-PT' : 'en';
       btn.querySelectorAll('span').forEach(s => s.classList.toggle('on', s.dataset.l === lang));
       if(typeof fillTicker === 'function') fillTicker();
-      document.dispatchEvent(new Event('langchange'));
+      if(!quiet) document.dispatchEvent(new Event('langchange'));
       try{ localStorage.setItem('sc-lang', lang); }catch(e){}
     }
-    let saved = 'en'; try{ saved = localStorage.getItem('sc-lang') || 'en'; }catch(e){}
-    if(saved === 'pt') apply('pt');
+    let saved = 'pt'; try{ saved = localStorage.getItem('sc-lang') || 'pt'; }catch(e){}
+    if(saved === 'pt') apply('pt', true);
     btn.addEventListener('click', () => apply(document.documentElement.lang === 'pt-PT' ? 'en' : 'pt'));
   })();
 
