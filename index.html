@@ -79,7 +79,7 @@ a{color:inherit; text-decoration:none}
 .bar .cta:hover{background:var(--yellow)}
 
 /* liquid photo */
-.liquid-band{position:relative; overflow:hidden; height:clamp(220px, 32vw, 460px); margin-top:42px; background:#9EA3B8}
+.liquid-band{position:relative; overflow:hidden; height:clamp(220px, 32vw, 460px); margin-top:var(--hdr, 52px); background:#9EA3B8}
 .liquid{position:absolute; inset:-14%; filter:url(#liquid);
   background:
     radial-gradient(40% 30% at 30% 40%, #D9C4A2 0, transparent 70%),
@@ -187,7 +187,11 @@ a{color:inherit; text-decoration:none}
 .svc ul{list-style:none; margin:0; padding:0; display:grid; border-top:1px solid rgba(255,255,255,.2)}
 .svc li{position:relative; display:flex; justify-content:space-between; gap:16px; padding-block:10px; padding-left:20px; border-bottom:1px solid rgba(255,255,255,.2); font-weight:500; letter-spacing:-.02em; font-size:15px; transition:padding .5s var(--ease), color .3s}
 .svc li::before{content:""; position:absolute; left:0; top:50%; width:8px; height:8px; border-left:1.4px solid currentColor; border-bottom:1.4px solid currentColor; transform:translateY(-75%)}
-.svc li:hover{padding-left:30px}
+.svc li{isolation:isolate; transition:padding .5s var(--ease), color .2s steps(2)}
+.svc li::after{content:""; position:absolute; inset:0 -10px; z-index:-1; background:var(--yellow); clip-path:inset(0 100% 0 0); transition:clip-path .42s steps(12, end)}
+.svc li:hover{padding-left:30px; color:var(--black)}
+.svc li:hover::after{clip-path:inset(0 0 0 0)}
+.svc li:hover .tiny{opacity:1}
 .svc li .tiny{opacity:.6}
 .note{display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:center; padding-block:22px clamp(40px,6vw,80px); border-top:1px solid rgba(255,255,255,.2)}
 .note p{margin:0; font-size:clamp(16px,1.6vw,22px); font-weight:500; letter-spacing:-.03em; max-width:58ch}
@@ -335,6 +339,25 @@ p, li, .tiny{text-wrap:pretty}
 .head p, .note p, .contact .sub, .about-r p, .svc p, .step p, .hero-foot p{text-wrap:balance}
 .note p{max-width:42ch}
 .note p b{display:block}
+
+/* ---- motion: scroll reveals, card tilt, magnetic buttons ---- */
+.rv{transition:translate .9s var(--ease), opacity .9s var(--ease), clip-path .6s steps(8, end)}
+html.rv-on .rv:not(.in){opacity:0; translate:0 36px}
+html.rv-on .head h2.rv:not(.in), html.rv-on .contact h2.rv:not(.in){opacity:1; translate:none; clip-path:inset(0 0 100% 0)}
+.head h2.rv.in, .contact h2.rv.in{clip-path:inset(-10% -5% -10% -5%)}
+.step{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); transition:transform .5s var(--ease), box-shadow .5s var(--ease)}
+.step:hover{box-shadow:0 30px 50px -30px rgba(0,0,0,.35)}
+.step .numbox{transition:transform .5s var(--ease)}
+.step:hover .numbox{transform:translate(4px,-4px); box-shadow:-4px 4px 0 var(--yellow)}
+.svc .t .numbox{transition:transform .5s var(--ease), box-shadow .5s var(--ease)}
+.svc:hover .t .numbox{transform:translate(3px,-3px); box-shadow:-3px 3px 0 var(--yellow)}
+.mag{transition:translate .35s var(--ease)}
+.portrait .liquid{translate:0 var(--py,0px)}
+.bar nav a{transition:color .2s}
+.bar nav a:hover{color:var(--yellow)}
+.flyer .sticker, .flyer h3{transition:translate .6s var(--ease)}
+.flyer:hover h3{translate:0 -4px}
+@media (prefers-reduced-motion: reduce){ html.rv-on .rv:not(.in){opacity:1; translate:none; clip-path:none} .step{transform:none} }
 
 @media (max-width: 1000px){
   .strip{grid-template-columns:auto 1fr auto 1fr}
@@ -776,6 +799,41 @@ p, li, .tiny{text-wrap:pretty}
     if(saved === 'pt') apply('pt');
     btn.addEventListener('click', () => apply(document.documentElement.lang === 'pt-PT' ? 'en' : 'pt'));
   })();
+
+  // scroll reveals (things already on screen never hide), card tilt, magnetic buttons, parallax
+  (function(){
+    if(reduce || !('IntersectionObserver' in window)) return;
+    const sel = '.head h2, .head p, .ruler, .flyer, .svc, .note, .step, .portrait, .about-r > *, .contact h2, .contact .sub, .mailrow, .contact .row';
+    const els = [...document.querySelectorAll(sel)];
+    els.forEach(el => {
+      el.classList.add('rv');
+      const sib = [...el.parentElement.children].filter(c => c.matches(sel));
+      el.style.transitionDelay = (Math.max(0, sib.indexOf(el)) * 90) + 'ms';
+      if(el.getBoundingClientRect().top < innerHeight) el.classList.add('in');
+    });
+    document.documentElement.classList.add('rv-on');
+    // clipped headings report no visible area, so watch their parent box instead
+    const watch = new Map();
+    const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ (watch.get(e.target) || []).forEach(el => el.classList.add('in')); io.unobserve(e.target); } }), {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(el => { if(el.classList.contains('in')) return; const t = el.matches('h2') ? el.parentElement : el; if(!watch.has(t)) watch.set(t, []); watch.get(t).push(el); io.observe(t); });
+    if(!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    document.querySelectorAll('.step').forEach(c => {
+      c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); const x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+        c.style.setProperty('--ry', (x*8).toFixed(2)+'deg'); c.style.setProperty('--rx', (-y*8).toFixed(2)+'deg'); });
+      c.addEventListener('pointerleave', () => { c.style.setProperty('--rx','0deg'); c.style.setProperty('--ry','0deg'); });
+    });
+    document.querySelectorAll('.copy, .pxcopy, .bar .cta, .lang').forEach(b => {
+      b.classList.add('mag');
+      b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); b.style.translate = ((e.clientX-r.left-r.width/2)*.25).toFixed(1)+'px '+((e.clientY-r.top-r.height/2)*.35).toFixed(1)+'px'; });
+      b.addEventListener('pointerleave', () => { b.style.translate = ''; });
+    });
+    const pl = document.querySelector('.portrait .liquid');
+    if(pl){ addEventListener('scroll', () => { const r = pl.parentElement.getBoundingClientRect(); pl.style.setProperty('--py', ((r.top + r.height/2 - innerHeight/2) * -.08).toFixed(1)+'px'); }, {passive:true}); }
+  })();
+  // keep the hero clear of the fixed header, whatever its height
+  const hdr = document.querySelector('header.bar');
+  const setHdr = () => document.documentElement.style.setProperty('--hdr', hdr.offsetHeight + 'px');
+  setHdr(); addEventListener('resize', setHdr); (document.fonts && document.fonts.ready || Promise.resolve()).then(setHdr);
   // Copy email
   const btn = document.getElementById('copy'), toast = document.getElementById('toast'), mail = document.getElementById('mail');
   function show(m){ toast.textContent = m; toast.classList.add('show'); clearTimeout(show.t); show.t = setTimeout(()=>toast.classList.remove('show'), 1800); }
