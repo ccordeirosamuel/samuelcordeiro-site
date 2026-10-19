@@ -791,7 +791,7 @@ html.loading, html.loading body{overflow:hidden}
 
 <footer class="wrap">
   <span class="big mix" style="gap:.1em .3em"><span>Samuel Cordeiro</span><span class="p" style="font-size:1.2em;color:var(--yellow)">SC</span><span>Brand &amp; Web</span><span class="numbox" id="yy2" style="background:#fff;color:#0B0B0C;font-size:1.5em;font-family:var(--pixel);font-weight:400;letter-spacing:0;line-height:1;padding:.08em .22em .02em">2K26</span><em>based in</em><span>Portugal</span></span>
-  <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span>
+  <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span><span class="tiny" style="opacity:.5">b7.4</span>
   <a class="tiny" href="#top">Back to top ↑</a>
 </footer>
 
@@ -1206,7 +1206,8 @@ html.loading, html.loading body{overflow:hidden}
     }
     function compose(){
       const k = d; bx.setTransform(k,0,0,k,0,0);
-      if(intro < 1){
+      if(!started){ bx.setTransform(1,0,0,1,0,0); bx.drawImage(layout.base, 0, 0); bx.setTransform(k,0,0,k,0,0); }
+      else if(intro < 1){
         bx.fillStyle = `rgb(${PAPER})`; bx.fillRect(0,0,W,H);
         const pa = Math.min(1, intro / .7);
         bx.fillStyle = '#0B0B0C';
@@ -1244,6 +1245,9 @@ html.loading, html.loading body{overflow:hidden}
     let pullX = -1e4, pullY = -1e4;
     function frame(now){
       raf = 0; if(!buf) return;
+      try{ draw(now); }catch(err){ cv.style.display = 'none'; }
+    }
+    function draw(now){
       let busy = false;
       if(started && intro < 1){ intro = Math.min(1, (now - introT0) / 1700); busy = true; }
       // energy fades slowly while the pointer rests on the photo, faster once it leaves
