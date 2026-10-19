@@ -448,14 +448,14 @@ html.loading, html.loading body{overflow:hidden}
 @media (prefers-reduced-motion: reduce){ #loader{display:none} }
 
 /* ---- VII intro: hairline frame (Marathon-style), wireframe globe, statement ---- */
-.intro{background:var(--table); padding-block:clamp(70px,9vw,130px) clamp(20px,3vw,40px)}
-.in-frame{position:relative; border-block:1px solid rgba(11,11,12,.16); padding-block:14px}
+.intro{background:var(--table); padding-block:clamp(36px,5vw,72px) clamp(20px,3vw,40px)}
+.in-frame{position:relative; border-bottom:1px solid rgba(11,11,12,.16); padding-bottom:14px}
 .xh2{position:absolute; width:11px; height:11px; background:linear-gradient(currentColor,currentColor) center/1px 100% no-repeat, linear-gradient(currentColor,currentColor) center/100% 1px no-repeat}
 .xh2.a{left:-5px; top:-6px} .xh2.b{right:-5px; top:-6px} .xh2.c{left:-5px; bottom:-6px} .xh2.d{right:-5px; bottom:-6px}
 .in-top, .in-bot{display:flex; align-items:center; justify-content:space-between; gap:16px; white-space:nowrap}
 .in-hatch{flex:0 1 220px; height:8px; background:repeating-linear-gradient(-55deg, currentColor 0 1px, transparent 1px 4px); opacity:.4}
 .in-ticks{flex:1; height:6px; background:repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 10px); opacity:.3}
-.in-grid{display:grid; grid-template-columns:minmax(0,3fr) minmax(0,9fr); gap:clamp(20px,4vw,64px); padding-block:clamp(36px,5vw,72px); border-block:1px solid rgba(11,11,12,.08); margin-block:14px}
+.in-grid{display:grid; grid-template-columns:minmax(0,3fr) minmax(0,9fr); gap:clamp(20px,4vw,64px); padding-block:0 clamp(36px,5vw,72px); border-bottom:1px solid rgba(11,11,12,.08); margin-bottom:14px}
 .in-side{display:grid; gap:12px; align-content:start; justify-items:start}
 .in-k{color:var(--mute)}
 #globe7{width:min(170px, 100%); aspect-ratio:1; display:block}
@@ -479,7 +479,7 @@ html.loading, html.loading body{overflow:hidden}
 @media (max-width: 720px){
   .band{gap:0}
   .band .r1{display:grid; grid-template-columns:1fr auto; align-items:end; column-gap:0; row-gap:0}
-  .band .name{grid-column:1 / -1; font-size:calc((100vw - 2 * max(var(--gutter), env(safe-area-inset-left, 0px))) / 6.1); padding-bottom:16px}
+  .band .name{grid-column:1 / -1; font-size:calc((var(--vw, 100vw) - 2 * max(var(--gutter), env(safe-area-inset-left, 0px))) / 6.1); padding-bottom:16px}
   .band .r1 .arrows, .band .r1 .dotted{border-top:1px solid rgba(255,255,255,.18); padding-block:14px; align-self:stretch; align-items:center}
   .band .r1 .arrows{font-size:clamp(15px, 4.4vw, 21px); justify-content:start; padding-right:12px; align-self:center}
   .band .r1 .dotted{font-size:clamp(30px, 9.4vw, 40px); justify-content:flex-end}
@@ -487,7 +487,7 @@ html.loading, html.loading body{overflow:hidden}
   .band .r2::before, .band .r2::after{content:""; position:absolute; top:-6px; width:11px; height:11px; background:linear-gradient(currentColor,currentColor) center/1px 100% no-repeat, linear-gradient(currentColor,currentColor) center/100% 1px no-repeat; opacity:.7}
   .band .r2::before{left:-5px} .band .r2::after{right:-5px}
   .band .paren{font-size:44px; justify-self:center}
-  .band .glitch{font-size:calc((100vw - 2 * max(var(--gutter), env(safe-area-inset-left, 0px))) / 5.26); line-height:.9; white-space:nowrap}
+  .band .glitch{font-size:calc((var(--vw, 100vw) - 2 * max(var(--gutter), env(safe-area-inset-left, 0px))) / 5.26); line-height:.9; white-space:nowrap}
   .band .strip{border-top:1px solid rgba(255,255,255,.18); padding-top:14px}
 }
 
@@ -610,8 +610,7 @@ html.loading, html.loading body{overflow:hidden}
 
   <section class="intro wrap" id="intro" aria-label="Who I am">
     <div class="in-frame">
-      <i class="xh2 a" aria-hidden="true"></i><i class="xh2 b" aria-hidden="true"></i><i class="xh2 c" aria-hidden="true"></i><i class="xh2 d" aria-hidden="true"></i>
-      <div class="in-top tiny"><span>[ 00 ] Intro</span><span class="in-hatch" aria-hidden="true"></span><span>SC—OS / Index</span></div>
+      <i class="xh2 c" aria-hidden="true"></i><i class="xh2 d" aria-hidden="true"></i>
       <div class="in-grid">
         <aside class="in-side">
           <span class="tiny in-k">Who I am</span>
@@ -789,7 +788,7 @@ html.loading, html.loading body{overflow:hidden}
 
 <footer class="wrap">
   <span class="big mix" style="gap:.1em .3em"><span>Samuel Cordeiro</span><span class="p" style="font-size:1.2em;color:var(--yellow)">SC</span><span>Brand &amp; Web</span><span class="numbox" id="yy2" style="background:#fff;color:#0B0B0C;font-size:1.5em;font-family:var(--pixel);font-weight:400;letter-spacing:0;line-height:1;padding:.08em .22em .02em">2K26</span><em>based in</em><span>Portugal</span></span>
-  <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span><span class="tiny" style="opacity:.5">b7.7</span>
+  <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span><span class="tiny" style="opacity:.5">b7.8</span>
   <a class="tiny" href="#top">Back to top ↑</a>
 </footer>
 
@@ -1106,7 +1105,7 @@ html.loading, html.loading body{overflow:hidden}
   })();
   // keep the hero clear of the fixed header, whatever its height
   const hdr = document.querySelector('header.bar');
-  const setHdr = () => document.documentElement.style.setProperty('--hdr', hdr.offsetHeight + 'px');
+  const setHdr = () => { const r = document.documentElement.style; r.setProperty('--hdr', hdr.offsetHeight + 'px'); r.setProperty('--vw', document.documentElement.clientWidth + 'px'); };
   setHdr(); addEventListener('resize', setHdr); (document.fonts && document.fonts.ready || Promise.resolve()).then(setHdr);
   // hide the header button when logo + language switch + button don't fit on one line
   const fitCta = () => {
