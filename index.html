@@ -476,8 +476,8 @@ html.loading, html.loading body{overflow:hidden}
   .band .r1{display:grid; grid-template-columns:1fr auto; align-items:end; column-gap:0; row-gap:0}
   .band .name{grid-column:1 / -1; font-size:calc((100vw - 2 * max(var(--gutter), env(safe-area-inset-left, 0px))) / 6.1); padding-bottom:16px}
   .band .r1 .arrows, .band .r1 .dotted{border-top:1px solid rgba(255,255,255,.18); padding-block:14px; align-self:stretch; align-items:center}
-  .band .r1 .arrows{font-size:24px; justify-content:start}
-  .band .r1 .dotted{font-size:40px; justify-content:flex-end}
+  .band .r1 .arrows{font-size:clamp(16px, 5vw, 24px); justify-content:start; padding-right:12px}
+  .band .r1 .dotted{font-size:clamp(30px, 9.4vw, 40px); justify-content:flex-end}
   .band .r2{display:grid; grid-template-columns:1fr; justify-items:start; gap:12px; border-top:1px solid rgba(255,255,255,.18); padding-block:16px 18px; position:relative}
   .band .r2::before, .band .r2::after{content:""; position:absolute; top:-6px; width:11px; height:11px; background:linear-gradient(currentColor,currentColor) center/1px 100% no-repeat, linear-gradient(currentColor,currentColor) center/100% 1px no-repeat; opacity:.7}
   .band .r2::before{left:-5px} .band .r2::after{right:-5px}
@@ -572,11 +572,11 @@ html.loading, html.loading body{overflow:hidden}
   <section class="band wrap" aria-label="Intro">
     <div class="r1">
       <h1 class="name" style="margin:0" aria-label="Samuel Cordeiro"><span>Samuel</span><span class="nsc" aria-hidden="true">SC</span><span>Cordeiro</span></h1>
-      <span class="arrows" aria-label="Brand and web">
-        <span>Brand</span>
+      <span class="arrows" aria-label="Branding and web design">
+        <span>Branding</span>
         <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M0 2 H34 V16" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M30 12 L34 18 L38 12" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
         <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M6 18 V4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2 8 L6 2 L10 8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 18 H40" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-        <span>Web</span>
+        <span>Web Design</span>
       </span>
       <span class="dotted" aria-label="Portugal">P<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="0 5.3407"/></svg>rtugal</span>
     </div>
