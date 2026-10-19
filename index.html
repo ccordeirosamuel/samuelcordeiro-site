@@ -221,6 +221,9 @@ a{color:inherit; text-decoration:none}
 /* about */
 .about{display:grid; grid-template-columns:5fr 7fr; gap:clamp(16px,3vw,48px); align-items:stretch; padding-bottom:clamp(40px,6vw,80px)}
 .portrait{position:relative; overflow:visible; aspect-ratio:4/5; background:transparent; max-width:100%; touch-action:pan-y}
+/* Safari collapses a stretched grid item whose children are all absolute; pin the 4:5 box with a spacer instead */
+.portrait{align-self:start; aspect-ratio:auto; height:auto}
+.portrait::before{content:""; display:block; padding-top:125%}
 #about{overflow-x:clip}
 #pimg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 35%; filter:grayscale(1) contrast(1.08); z-index:0}
 #pcv{position:absolute; left:-24px; top:-24px; width:calc(100% + 48px); height:calc(100% + 48px); display:block; z-index:1}
