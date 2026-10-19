@@ -359,6 +359,12 @@ html.rv-on .head h2.rv:not(.in), html.rv-on .contact h2.rv:not(.in){opacity:1; t
 .flyer:hover h3{translate:0 -4px}
 @media (prefers-reduced-motion: reduce){ html.rv-on .rv:not(.in){opacity:1; translate:none; clip-path:none} .step{transform:none} }
 
+/* ---- VI: decode effect on titles and body copy: letters swap through pixel glyphs, then settle ---- */
+.scw{white-space:nowrap}
+.scc{display:inline-block; text-align:center}
+.scc.px{font-family:var(--pixel); font-weight:400; opacity:.5; letter-spacing:0}
+.scc.hit{background:var(--yellow); color:#0B0B0C; opacity:1}
+
 @media (max-width: 1000px){
   .strip{grid-template-columns:auto 1fr auto 1fr}
   .strip .h2, .strip .h3{display:none}
@@ -793,6 +799,7 @@ html.rv-on .head h2.rv:not(.in), html.rv-on .contact h2.rv:not(.in){opacity:1; t
       document.documentElement.lang = lang === 'pt' ? 'pt-PT' : 'en';
       btn.querySelectorAll('span').forEach(s => s.classList.toggle('on', s.dataset.l === lang));
       if(typeof fillTicker === 'function') fillTicker();
+      document.dispatchEvent(new Event('langchange'));
       try{ localStorage.setItem('sc-lang', lang); }catch(e){}
     }
     let saved = 'en'; try{ saved = localStorage.getItem('sc-lang') || 'en'; }catch(e){}
@@ -803,7 +810,7 @@ html.rv-on .head h2.rv:not(.in), html.rv-on .contact h2.rv:not(.in){opacity:1; t
   // scroll reveals (things already on screen never hide), card tilt, magnetic buttons, parallax
   (function(){
     if(reduce || !('IntersectionObserver' in window)) return;
-    const sel = '.head h2, .head p, .ruler, .flyer, .svc, .note, .step, .portrait, .about-r > *, .contact h2, .contact .sub, .mailrow, .contact .row';
+    const sel = '.ruler, .flyer, .svc, .note, .step, .portrait, .about-r .spec, .mailrow, .contact .row';
     const els = [...document.querySelectorAll(sel)];
     els.forEach(el => {
       el.classList.add('rv');
@@ -834,6 +841,59 @@ html.rv-on .head h2.rv:not(.in), html.rv-on .contact h2.rv:not(.in){opacity:1; t
   const hdr = document.querySelector('header.bar');
   const setHdr = () => document.documentElement.style.setProperty('--hdr', hdr.offsetHeight + 'px');
   setHdr(); addEventListener('resize', setHdr); (document.fonts && document.fonts.ready || Promise.resolve()).then(setHdr);
+
+  // VI decode: titles + body copy swap through random letters and pixel blocks, resolving left to right
+  (function(){
+    if(reduce) return;
+    const TARGETS = '.band .name, .head h2, .svc h3, .step h3, .flyer h3, .about-r h2, .contact h2, .head p, .svc > p, .step p, .note p, .about-r .lead, .about-r > p, .contact .sub';
+    const SKIP = '.nsc, .lsc, .p, .pix, svg, script, .scc';
+    const GL = '▖▗▘▙▚▛▜▝▞▟▀▄█▌▐░▒▓ABCDEFGHJKLMNPRSTUVWXYZ0123456789#%&*+=/<>?'.split('');
+    function decode(el){
+      if(el._scr) return; el._scr = true;
+      const isTitle = /^H[1-6]$/.test(el.tagName);
+      const nodes = []; const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      let n; while((n = w.nextNode())){ if(!n.textContent.trim()) continue; if(n.parentElement.closest(SKIP)) continue; nodes.push(n); }
+      const parts = [], chars = [];
+      nodes.forEach(n => {
+        const holder = document.createElement('span'); holder.className = 'sch';
+        n.textContent.split(/(\s+)/).forEach(tok => {
+          if(!tok) return;
+          if(/^\s+$/.test(tok)){ holder.appendChild(document.createTextNode(tok)); return; }
+          const wd = document.createElement('span'); wd.className = 'scw';
+          for(const c of tok){ const s = document.createElement('span'); s.className = 'scc'; s.textContent = c; s.dataset.f = c; wd.appendChild(s); chars.push(s); }
+          holder.appendChild(wd);
+        });
+        n.parentNode.insertBefore(holder, n); n.remove(); parts.push({n, holder});
+      });
+      const N = chars.length; if(!N){ el._scr = false; return; }
+      const ws = chars.map(s => s.getBoundingClientRect().width);
+      chars.forEach((s,i) => { s.style.width = ws[i] + 'px'; s.classList.add('px'); s.textContent = GL[Math.random()*GL.length|0]; });
+      const total = isTitle ? Math.min(1100, 380 + N*38) : Math.min(1300, 300 + N*6);
+      const at = chars.map((s,i) => (i/N)*total*.82 + Math.random()*total*.18);
+      const t0 = performance.now(); let last = 0;
+      function frame(now){
+        const t = now - t0, swap = now - last > 50; if(swap) last = now; let done = 0;
+        for(let i=0;i<N;i++){
+          const s = chars[i];
+          if(s._d){ done++; continue; }
+          if(t >= at[i]){ s._d = 1; s.textContent = s.dataset.f; s.classList.remove('px'); if(isTitle){ s.classList.add('hit'); setTimeout(() => s.classList.remove('hit'), 110); } done++; }
+          else if(swap){ s.textContent = GL[Math.random()*GL.length|0]; }
+        }
+        if(done < N) requestAnimationFrame(frame); else setTimeout(restore, 160);
+      }
+      function restore(){ parts.forEach(({n, holder}) => { holder.parentNode.insertBefore(n, holder); holder.remove(); }); el._scr = false; }
+      requestAnimationFrame(frame);
+    }
+    const els = [...document.querySelectorAll(TARGETS)];
+    const seen = new WeakSet();
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
+      if(e.isIntersecting && !seen.has(e.target)){ seen.add(e.target); decode(e.target); io.unobserve(e.target); }
+    }), {threshold:.25}) : null;
+    const go = () => els.forEach(el => io ? io.observe(el) : decode(el));
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(go);
+    // switching EN/PT re-decodes whatever is on screen
+    document.addEventListener('langchange', () => els.forEach(el => { const r = el.getBoundingClientRect(); if(r.bottom > 0 && r.top < innerHeight) decode(el); }));
+  })();
   // Copy email
   const btn = document.getElementById('copy'), toast = document.getElementById('toast'), mail = document.getElementById('mail');
   function show(m){ toast.textContent = m; toast.classList.add('show'); clearTimeout(show.t); show.t = setTimeout(()=>toast.classList.remove('show'), 1800); }
