@@ -56,7 +56,15 @@ a{color:inherit; text-decoration:none}
 
 /* top bar */
 .bar{position:fixed; top:env(safe-area-inset-top, 0px); left:0; right:0; z-index:40; background:var(--black); color:var(--white); padding-block:11px; display:flex; justify-content:space-between; align-items:center; gap:16px}
-.bar .logo{font-weight:700; letter-spacing:-.04em; font-size:16px}
+.bar .logo{font-weight:700; letter-spacing:-.04em; font-size:16px; text-transform:uppercase; display:inline-flex; align-items:center; gap:.4em; white-space:nowrap}
+.bar .cta{white-space:nowrap}
+.band .name{display:flex; flex-wrap:wrap; align-items:center; gap:0 .3em}
+.band .name .nsc{font-family:var(--pixel); font-weight:400; letter-spacing:0; text-transform:none; color:var(--yellow); font-size:1.3em; line-height:.7; margin-right:-.072em}
+/* secondary / supporting text in caps; body copy and serif stay as they are */
+.bar nav, .bar .cta, .lang, .tiny, .io1, .svc li, .flyer ul, .mix .tag, .row a, .copy, footer, .ticker .g, .toast, .portrait .cap, .spec b{text-transform:uppercase}
+.tiny .serif, .tiny em, footer em, footer .serif, .ticker .s, .ticker .p, .io1 .serif{text-transform:none}
+@media (max-width: 460px){ .bar .logo{font-size:13px} .bar .cta{display:none} }
+.bar .logo .lsc{font-family:var(--pixel); font-weight:400; letter-spacing:0; text-transform:none; color:var(--yellow); font-size:1.3em; line-height:1}
 .bar nav{display:flex; gap:22px; font-weight:500; font-size:13px}
 .bar nav a{position:relative}
 .bar nav a::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .5s var(--ease)}
@@ -85,7 +93,7 @@ a{color:inherit; text-decoration:none}
 .arrows{display:inline-grid; grid-template-columns:auto auto; align-items:center; font-family:var(--serif); font-size:clamp(20px, 3.3vw, 54px); line-height:.95; column-gap:.12em}
 .arrows svg{width:1.6em; height:.8em; overflow:visible}
 .dotted{display:inline-flex; align-items:center; font-family:var(--serif); font-size:clamp(40px, 7.4vw, 124px); letter-spacing:-.03em}
-.dotted svg{width:.66em; height:.66em; margin:0 .02em; transform:translateY(.04em)}
+.dotted svg{width:.62em; height:.62em; margin:0 -.045em 0 -.06em; transform:translateY(.05em)}
 .dotted svg circle{animation:spin 18s linear infinite; transform-origin:50% 50%}
 @keyframes spin{to{transform:rotate(360deg)}}
 .paren{font-family:var(--serif); font-size:clamp(40px, 7.4vw, 124px); letter-spacing:-.03em; display:inline-flex; align-items:center; gap:.2em}
@@ -158,6 +166,12 @@ a{color:inherit; text-decoration:none}
 .svcs{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid rgba(255,255,255,.2)}
 .svc{padding-block:clamp(24px,3vw,40px); display:grid; gap:22px; align-content:start; min-width:0}
 .svc + .svc{border-left:1px solid rgba(255,255,255,.2); padding-left:clamp(16px,2.4vw,36px)}
+.svcs > .svc:first-child{padding-right:clamp(16px,2.4vw,36px)}
+/* align the two service columns row by row (title, in/out, text, list) */
+@media (min-width: 721px){
+  .svcs{grid-template-rows:repeat(4, auto); row-gap:22px; column-gap:0}
+  .svc{grid-row:span 4; grid-template-rows:subgrid; row-gap:22px}
+}
 .svc .t{display:flex; align-items:flex-start; gap:14px}
 .svc .t .numbox{background:var(--white); color:var(--black); font-size:clamp(40px,5vw,80px)}
 .svc h3{margin:0; font-weight:700; letter-spacing:-.06em; line-height:.86; font-size:clamp(40px,5.4vw,92px)}
@@ -175,7 +189,7 @@ a{color:inherit; text-decoration:none}
 /* process */
 .steps{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:clamp(14px,2vw,30px); padding-bottom:clamp(40px,6vw,80px)}
 .step{background:var(--paper); padding:clamp(16px,1.8vw,26px); display:grid; gap:40px; align-content:space-between; min-height:clamp(220px, 22vw, 320px); position:relative; overflow:hidden; isolation:isolate}
-.step .numbox{font-size:clamp(56px, 6vw, 96px); justify-self:start}
+.step .numbox{--b:clamp(64px, 6vw, 92px); width:var(--b); height:var(--b); display:grid; place-items:center; padding:0; justify-self:start; font-family:var(--serif); font-weight:400; letter-spacing:0; line-height:1; font-size:calc(var(--b) * .5); font-variant-numeric:lining-nums}
 .step h3{margin:0; font-weight:700; letter-spacing:-.05em; font-size:clamp(26px,2.6vw,40px); line-height:.9}
 .step p{margin:.5em 0 0; font-weight:500; letter-spacing:-.02em; font-size:15px; max-width:32ch}
 .step::after{content:""; position:absolute; right:-30%; top:-30%; width:70%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle, var(--c), transparent 70%); filter:blur(20px); opacity:0; transition:opacity .6s; z-index:-1}
@@ -253,8 +267,17 @@ footer .big em{font-family:var(--serif); font-weight:400}
 .stamp b{position:relative; font-family:var(--pixel); font-weight:400; font-size:clamp(20px,2.1vw,28px); line-height:.85; text-align:center}
 .stamp.ink{color:var(--white)} .stamp.ink .hex{background:var(--black)}
 .ticker{background:var(--black); color:var(--white); overflow:hidden; white-space:nowrap; padding-block:9px; border-block:1px solid rgba(255,255,255,.14)}
-.ticker .tr{display:inline-flex; align-items:center; gap:22px; padding-left:22px; animation:tick 46s linear infinite}
-.ticker .tr > *{flex:none}
+.ticker .tr{display:inline-flex; align-items:center; animation:tick 46s linear infinite; will-change:transform}
+.ticker .grp{display:inline-flex; align-items:center; gap:22px; padding-right:22px; flex:none}
+.ticker .grp > *{flex:none}
+.ticker .tk{width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.4}
+.ticker .tk use{fill:none; stroke:currentColor; stroke-width:1.4}
+.ticker .ast{font-size:20px; line-height:1}
+.ticker .sc{display:inline-grid; place-items:center; width:30px; height:30px; border:1.4px solid currentColor; border-radius:50%; font-size:11px; font-weight:700; letter-spacing:-.02em}
+.ticker .tpills{display:inline-flex; gap:4px; align-items:center}
+.ticker .tpills i{display:block; height:10px; width:10px; border-radius:99px; background:currentColor}
+.ticker .tpills i:nth-child(2){width:22px} .ticker .tpills i:nth-child(4){background:none; border:1.4px solid currentColor}
+.ticker .tbc{width:58px; height:18px}
 .ticker .p{font-family:var(--pixel); font-size:24px; line-height:1}
 .ticker .s{font-family:var(--serif); font-size:20px; line-height:1}
 .ticker .g{font-weight:700; letter-spacing:-.05em; font-size:19px}
@@ -265,8 +288,9 @@ footer .big em{font-family:var(--serif); font-weight:400}
 .step .smeta .hatch{width:30px}
 .step .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px}
 
-.io1{display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:7px 14px; justify-self:start; font-size:11px}
-.io1 span{background:var(--white); color:var(--black); padding:1px 6px; border-radius:999px; font-weight:600}
+.io1{display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:4px 16px 4px 4px; justify-self:start; font-size:11px; line-height:1}
+.io1 span{background:var(--white); color:var(--black); padding:5px 9px; border-radius:999px; font-weight:600; line-height:1}
+.io1 span + svg + span{margin-left:2px}
 .spec{display:grid; border-top:1.5px solid var(--black)}
 .spec div{display:flex; align-items:baseline; gap:10px; padding-block:9px; border-bottom:1px solid var(--line)}
 .spec .tiny{color:var(--mute); flex:none}
@@ -274,6 +298,36 @@ footer .big em{font-family:var(--serif); font-weight:400}
 .spec b{font-weight:600; letter-spacing:-.02em; font-size:15px}
 .dot4{width:10px; height:10px; border-radius:50%; background:#1DB954; box-shadow:0 0 0 4px rgba(29,185,84,.2); animation:pulse4 2s ease-in-out infinite}
 @keyframes pulse4{50%{box-shadow:0 0 0 7px rgba(29,185,84,0)}}
+
+/* grotesk titles in caps; serif, pixel and italic inserts keep their case */
+.band .name, .head h2, .mix .g, .flyer h3, .flyer .bot .big, .svc h3, .step h3, .about-r h2, .contact h2, .op .foot, footer .big{text-transform:uppercase}
+.head h2 .serif, .svc h3 .serif, .about-r h2 .serif, .contact h2 .serif, .mix .s, .mix .p, .op .foot em, .op .foot .pix, footer .big em, footer .big .p{text-transform:none}
+
+/* pixel-trail cursor (fine pointers only) */
+#pxTrail{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:95}
+.pxcur{position:fixed; left:0; top:0; z-index:96; width:4px; height:4px; margin:-2px 0 0 -2px; background:#fff; mix-blend-mode:difference; pointer-events:none; opacity:0; transition:width .25s, height .25s, margin .25s, opacity .2s}
+.pxcur.on{opacity:1}
+.pxcur.link{width:10px; height:10px; margin:-5px 0 0 -5px}
+
+.bar .hr{display:flex; align-items:center; gap:10px}
+.mailrow{display:flex; align-items:center; gap:clamp(10px,1.4vw,20px); justify-self:start; max-width:100%; min-width:0}
+.mailrow .mail{min-width:0}
+.pxcopy{flex:none; width:clamp(40px,4.2vw,64px); aspect-ratio:1; display:grid; place-items:center; background:transparent; color:var(--black); border:2px solid var(--black); cursor:pointer; transition:background .25s, color .25s, transform .25s}
+.pxcopy svg{width:55%; height:55%; fill:currentColor; grid-area:1/1}
+.pxcopy .ico-ok{opacity:0}
+.pxcopy:hover{background:var(--yellow); color:var(--black); transform:translate(-2px,-2px); box-shadow:2px 2px 0 var(--black)}
+.pxcopy:active{transform:none; box-shadow:none}
+.pxcopy.done{background:transparent; border-color:var(--magenta); color:var(--magenta)}
+.pxcopy.done .ico-copy{opacity:0} .pxcopy.done .ico-ok{opacity:1}
+.lang{font:inherit; font-size:12px; font-weight:600; display:inline-flex; border:1px solid rgba(255,255,255,.4); border-radius:999px; padding:2px; background:none; color:var(--white); cursor:pointer}
+.lang span{padding:4px 9px; border-radius:999px; transition:background .3s, color .3s}
+.lang span.on{background:var(--white); color:var(--black)}
+
+/* tidy rags: balanced short copy, no orphans in longer copy */
+p, li, .tiny{text-wrap:pretty}
+.head p, .note p, .contact .sub, .about-r p, .svc p, .step p, .hero-foot p{text-wrap:balance}
+.note p{max-width:42ch}
+.note p b{display:block}
 
 @media (max-width: 1000px){
   .strip{grid-template-columns:auto 1fr auto 1fr}
@@ -322,9 +376,9 @@ footer .big em{font-family:var(--serif); font-weight:400}
 </svg>
 
 <header class="bar wrap">
-  <a class="logo" href="#top">Samuel Cordeiro</a>
+  <a class="logo" href="#top" aria-label="Samuel Cordeiro"><span>Samuel</span><span class="lsc" aria-hidden="true">SC</span><span>Cordeiro</span></a>
   <nav aria-label="Main"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">How it works</a><a href="#about">About</a></nav>
-  <a class="cta" href="#contact">Start a project</a>
+  <span class="hr"><button class="lang" id="langBtn" type="button" aria-label="Switch language / Mudar idioma"><span data-l="en" class="on">EN</span><span data-l="pt">PT</span></button><a class="cta" href="#contact">Start a project</a></span>
 </header>
 
 <main id="top">
@@ -336,17 +390,17 @@ footer .big em{font-family:var(--serif); font-weight:400}
 
   <section class="band wrap" aria-label="Intro">
     <div class="r1">
-      <h1 class="name" style="margin:0">Samuel Cordeiro</h1>
+      <h1 class="name" style="margin:0" aria-label="Samuel Cordeiro"><span>Samuel</span><span class="nsc" aria-hidden="true">SC</span><span>Cordeiro</span></h1>
       <span class="arrows" aria-label="Brand and web">
         <span>Brand</span>
         <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M0 2 H34 V16" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M30 12 L34 18 L38 12" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
         <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M6 18 V4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2 8 L6 2 L10 8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 18 H40" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
         <span>Web</span>
       </span>
-      <span class="dotted" aria-label="Portugal">P<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 6.67"/></svg>rtugal</span>
+      <span class="dotted" aria-label="Portugal">P<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="0 5.3407"/></svg>rtugal</span>
     </div>
     <div class="r2">
-      <span class="paren">( <span class="stack"><small>since 2020</small><span>Designer</span></span> )</span>
+      <span class="paren">( <span class="stack"><small>since 2023</small><span>Designer</span></span> )</span>
       <span class="glitch">Brands &amp; Sites</span>
     </div>
     <div class="strip tiny">
@@ -420,7 +474,8 @@ footer .big em{font-family:var(--serif); font-weight:400}
     </div>
   </section>
 
-  <div class="ticker" aria-hidden="true"><div class="tr"><span class="p">Brand identity</span><span class="s">/</span><span class="g">Web design</span><span class="s">/</span><span class="p">Portugal</span><span class="s">/</span><span class="g">Worldwide</span><span class="s">/</span><span class="p">Brand identity</span><span class="s">/</span><span class="g">Web design</span><span class="s">/</span><span class="p">Portugal</span><span class="s">/</span><span class="g">Worldwide</span><span class="s">/</span><span class="p">Brand identity</span><span class="s">/</span><span class="g">Web design</span><span class="s">/</span><span class="p">Portugal</span><span class="s">/</span><span class="g">Worldwide</span><span class="s">/</span><span class="p">Brand identity</span><span class="s">/</span><span class="g">Web design</span><span class="s">/</span><span class="p">Portugal</span><span class="s">/</span><span class="g">Worldwide</span><span class="s">/</span></div></div>
+  <div class="ticker" aria-hidden="true"><div class="tr" id="tickTr"></div></div>
+  <template id="tickGroup"><span class="grp"><span class="p">Brand identity</span><svg class="tk" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20M4 7h16M4 17h16"/></svg><span class="g">Web design</span><svg class="tk" viewBox="0 0 24 24"><path d="M5 10a7 7 0 0 1 12.5-3.5"/><path d="M18 3v4h-4"/><path d="M19 14a7 7 0 0 1-12.5 3.5"/><path d="M6 21v-4h4"/></svg><span class="s">worldwide</span><span class="ast">✳</span><span class="g">©2026</span><span class="tpills"><i></i><i></i><i></i><i></i></span><span class="p">Design</span><span class="sc">SC</span><span class="s">Figma expert</span><span class="tbc barcode" data-seed="61"></span><span class="g">Brands &amp; Sites</span><svg class="tk" viewBox="0 0 24 24"><path d="M12 3 L22 20 H2 Z"/><path d="M8 15h8M12 9v6"/></svg><span class="s">ready to build</span><svg class="tk" viewBox="0 0 20 20"><use href="#s-spark"/></svg></span></template>
 
   <!-- services -->
   <section id="services" class="svc-band wrap">
@@ -482,10 +537,10 @@ footer .big em{font-family:var(--serif); font-weight:400}
     <div class="about">
       <div class="portrait" aria-label="Portrait">
         <div class="liquid"></div>
-        <span class="regs" style="color:#fff" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="regs" style="color:#fff" aria-hidden="true"><i></i><i></i><i style="display:none"></i><i></i></span>
         <span class="cap tiny" style="right:34px; top:34px">Fig. 01<br>Samuel Cordeiro</span>
         <span class="barcode" data-seed="21" style="position:absolute; right:34px; bottom:34px; color:#fff; z-index:2"></span>
-        <span class="numbox">SC</span>
+        <span class="numbox pix" style="font-weight:400; letter-spacing:0; font-size:clamp(26px,3vw,46px); line-height:1; padding:.35em .5em .3em">SC</span>
       </div>
       <div class="about-r">
         <h2 class="mix"><span class="g">Hi, I’m</span><span class="s">( Samuel )</span></h2>
@@ -504,8 +559,14 @@ footer .big em{font-family:var(--serif); font-weight:400}
   <section id="contact" class="contact wrap">
     <div class="fx" aria-hidden="true"></div>
     <h2>Have a<br>project <span class="serif">in mind?</span></h2>
-    <p class="sub">Send me an email with a few lines about it. I reply within 24 hours.</p>
-    <div class="mail" id="mail">ccordeiro.samuel@gmail.com</div>
+    <p class="sub">Send me an email with a few lines about it.<br>I reply within 24 hours.</p>
+    <div class="mailrow">
+      <div class="mail" id="mail">ccordeiro.samuel@gmail.com</div>
+      <button class="pxcopy" id="copy2" type="button" aria-label="Copy email" title="Copy email">
+        <svg class="ico-copy" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><rect x="5" y="1" width="10" height="1"/><rect x="14" y="1" width="1" height="10"/><rect x="5" y="1" width="1" height="4"/><rect x="11" y="10" width="4" height="1"/><rect x="1" y="5" width="10" height="1"/><rect x="1" y="14" width="10" height="1"/><rect x="1" y="5" width="1" height="10"/><rect x="10" y="5" width="1" height="10"/><rect x="3" y="8" width="6" height="1"/><rect x="3" y="11" width="4" height="1"/></svg>
+        <svg class="ico-ok" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="8" width="2" height="2"/><rect x="4" y="10" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/><rect x="8" y="10" width="2" height="2"/><rect x="10" y="8" width="2" height="2"/><rect x="12" y="6" width="2" height="2"/><rect x="14" y="4" width="2" height="2"/></svg>
+      </button>
+    </div>
     <div class="row">
       <button class="copy" id="copy" type="button">Copy email</button>
       <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram <span>↗</span></a>
@@ -522,12 +583,14 @@ footer .big em{font-family:var(--serif); font-weight:400}
 </main>
 
 <footer class="wrap">
-  <span class="big mix" style="gap:.1em .3em"><span>Samuel Cordeiro</span><span class="p" style="font-size:1.2em">SC</span><span>Brand &amp; Web</span><span class="numbox" id="yy2" style="background:#fff;color:#0B0B0C;font-size:1.6em">26</span><em>at</em><span>Portugal</span></span>
+  <span class="big mix" style="gap:.1em .3em"><span>Samuel Cordeiro</span><span class="p" style="font-size:1.2em;color:var(--yellow)">SC</span><span>Brand &amp; Web</span><span class="numbox" id="yy2" style="background:#fff;color:#0B0B0C;font-size:1.5em;font-family:var(--pixel);font-weight:400;letter-spacing:0;line-height:1;padding:.08em .22em .02em">26</span><em>based in</em><span>Portugal</span></span>
   <span class="tiny">© <span id="yr">2026</span> · Brand &amp; web design</span>
   <a class="tiny" href="#top">Back to top ↑</a>
 </footer>
 
 <div class="paper" aria-hidden="true"></div>
+<canvas id="pxTrail" aria-hidden="true"></canvas>
+<div class="pxcur" id="pxCur" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite">Email copied</div>
 
 <script>
@@ -548,12 +611,27 @@ footer .big em{font-family:var(--serif); font-weight:400}
   const len = new Date(yr, mon, 0).getDate(), days = document.getElementById('days');
   for(let i=1;i<=len;i++){ const s = document.createElement('span'); s.textContent = i; if(i===day) s.className='today'; days.appendChild(s); }
   // barcodes
-  document.querySelectorAll('.barcode').forEach(el=>{
+
+  // ticker: repeat the group until half the track covers the screen, then double it so -50% loops seamlessly
+  const tr = document.getElementById('tickTr'), tpl = document.getElementById('tickGroup');
+  function fillTicker(){
+    tr.innerHTML = tpl.innerHTML;
+    const gw = tr.firstElementChild.getBoundingClientRect().width || 800;
+    const n = Math.max(1, Math.ceil((innerWidth + gw) / gw));
+    tr.innerHTML = tpl.innerHTML.repeat(n*2);
+    tr.style.animationDuration = (n*gw/55).toFixed(1) + 's';
+    tr.querySelectorAll('.barcode').forEach(paintBarcode);
+  }
+  function paintBarcode(el){
     let seed = +el.dataset.seed || 1; const r = ()=> (seed = seed*16807 % 2147483647) / 2147483647;
     let x = 0; const parts = [];
     while(x < 100){ const w = .8 + r()*3.4, g = .9 + r()*3; parts.push('currentColor '+x.toFixed(1)+'% '+(x+w).toFixed(1)+'%', 'transparent '+(x+w).toFixed(1)+'% '+(x+w+g).toFixed(1)+'%'); x += w+g; }
     el.style.background = 'linear-gradient(90deg,' + parts.join(',') + ')';
-  });
+  }
+  document.querySelectorAll('.barcode').forEach(paintBarcode);
+  fillTicker();
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(fillTicker);
+  let tkr; addEventListener('resize', ()=>{ clearTimeout(tkr); tkr = setTimeout(fillTicker, 200); });
   document.getElementById('cd2').textContent = pad(day);
   document.getElementById('cm2').textContent = pad(mon);
   document.getElementById('yy2').textContent = String(yr).slice(-2);
@@ -613,13 +691,96 @@ footer .big em{font-family:var(--serif); font-weight:400}
   wave(w1, 0, 14); wave(w2, 2, 10);
   if(!reduce){ (function loop(n){ wave(w1, n/900, 14); wave(w2, n/700 + 2, 10); requestAnimationFrame(loop); })(0); }
 
+
+  // pixel-trail cursor
+  (function(){
+    if(reduce || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    document.documentElement.classList.add('pxc');
+    const cv = document.getElementById('pxTrail'), cx = cv.getContext('2d'), cur = document.getElementById('pxCur');
+    const C = 5, cells = new Map(), COLS = ['#F6F21C', '#F6F21C']; let lx = null, ly = null, raf = 0, last = 0;
+    function size(){ const d = Math.min(2, devicePixelRatio||1); cv.width = innerWidth*d; cv.height = innerHeight*d; cx.setTransform(d,0,0,d,0,0); }
+    size(); addEventListener('resize', size);
+    function mark(x,y){
+      const gx = Math.floor(x/C), gy = Math.floor(y/C);
+      for(let k=0;k<4;k++){
+        const ox = k ? Math.round((Math.random()-.5)*3) : 0, oy = k ? Math.round((Math.random()-.5)*3) : 0;
+        cells.set((gx+ox)+','+(gy+oy), (k ? .55 + Math.random()*.3 : 1) + (Math.random() < .5 ? 0 : 10));
+      }
+    }
+    addEventListener('pointermove', e=>{
+      const x = e.clientX, y = e.clientY;
+      cur.style.transform = 'translate('+(Math.floor(x/C)*C+C/2)+'px,'+(Math.floor(y/C)*C+C/2)+'px)';
+      cur.classList.add('on');
+      if(lx !== null){ const dx = x-lx, dy = y-ly, n = Math.ceil(Math.hypot(dx,dy)/C); for(let i=1;i<=n;i++) mark(lx+dx*i/n, ly+dy*i/n); }
+      else mark(x,y);
+      lx = x; ly = y;
+      if(!raf){ last = performance.now(); raf = requestAnimationFrame(tick); }
+    }, {passive:true});
+    document.addEventListener('pointerleave', ()=>{ cur.classList.remove('on'); lx = ly = null; });
+    document.addEventListener('pointerover', e=>{ cur.classList.toggle('link', !!e.target.closest('a,button')); });
+    function tick(now){
+      const dt = Math.min(64, now-last)/1000; last = now;
+      cx.clearRect(0,0,innerWidth,innerHeight);
+      for(const [k,v] of cells){
+        const col = v >= 10 ? 1 : 0, nv = (v - col*10) - dt*4.5;
+        if(nv <= 0){ cells.delete(k); continue; }
+        cells.set(k, nv + col*10);
+        const [gx,gy] = k.split(',').map(Number), sz = Math.ceil(C*Math.min(1, nv*1.4));
+        cx.fillStyle = COLS[col];
+        cx.globalAlpha = 1;
+        cx.fillRect(gx*C + (C-sz)/2, gy*C + (C-sz)/2, sz, sz);
+      }
+      cx.globalAlpha = 1;
+      raf = cells.size ? requestAnimationFrame(tick) : 0;
+      if(!raf) cx.clearRect(0,0,innerWidth,innerHeight);
+    }
+  })();
+
+  // EN / PT-PT language switch
+  (function(){
+    const PT = {"Work": "Trabalho", "Services": "Serviços", "How it works": "Como funciona", "About": "Sobre", "Start a project": "Começar um projeto", "Brand": "Branding", "since 2023": "desde 2023", "Designer": "Designer", "Brands & Sites": "Branding & Sites", "Brand & web designer": "Designer de branding & web", "Based in Portugal": "Localizado em Portugal", "Working with clients worldwide": "A trabalhar com clientes no mundo inteiro", "Replies within 24 hours": "Respondo em 24 horas", "Selected work": "Trabalho selecionado", "Scroll down": "Desce", "for": "para ver", "four recent projects": "quatro projetos recentes", "Selected": "Trabalho", "work": "selecionado", "Four recent projects. Hover a flyer to straighten it, click to see the full project.": "Quatro projetos recentes. Passa o rato num flyer para o endireitar, clica para veres o projeto completo.", "Seafood": "Marisqueira", "Logo": "Logótipo", "Colour palette": "Paleta de cores", "Menus": "Menus", "Signage": "Sinalética", "Website": "Site", "Brand +": "Branding +", "New logo": "Novo logótipo", "Typography": "Tipografia", "Packaging": "Embalagens", "Brand guide": "Guia de branding", "Rebrand": "Rebranding", "Ceramics": "Cerâmica", "Books": "Livros", "Site map": "Mapa do site", "Page designs": "Design das páginas", "Mobile views": "Versões mobile", "Prototype": "Protótipo", "Publisher": "Editora", "Identity": "Identidade", "Posters": "Cartazes", "Tickets": "Bilhetes", "Social kit": "Kit para redes", "Lisbon": "Lisboa", "Two things,": "Duas coisas,", "done well": "bem feitas", "Brand identity": "Branding", "+ Web design": "+ Web design", "Delivered in Figma": "Entregue em Figma", "I focus on two services so every project gets my full attention.": "Foco-me em dois serviços para que cada projeto tenha toda a minha atenção.", "In": "Entra", "Out": "Sai", "Your business and goals": "O teu negócio e objetivos", "A complete brand": "Um branding completo", "How your business looks, everywhere. From the logo to the rules that keep it consistent.": "Como o teu negócio se apresenta, em todo o lado. Do logótipo às regras que o mantêm coerente.", "Logo and symbol": "Logótipo e símbolo", "Core": "Base", "Colours and typography": "Cores e tipografia", "Brand guidelines": "Guia de branding", "Social media and print templates": "Templates para redes sociais e impressão", "Add-on": "Extra", "Packaging and signage": "Embalagens e sinalética", "Your content and brand": "O teu conteúdo e branding", "A website, ready to build": "Um site, pronto a construir", "Websites designed screen by screen in Figma, ready for a developer to build.": "Sites desenhados ecrã a ecrã em Figma, prontos para um programador construir.", "Site structure": "Estrutura do site", "Design for every page": "Design de todas as páginas", "Desktop and mobile versions": "Versões desktop e mobile", "Clickable prototype": "Protótipo clicável", "Handoff files for your developer": "Ficheiros de entrega para o programador", "Figma files · Ready to build · Figma files · Ready to build ·": "Ficheiros Figma · Prontos a construir · Ficheiros Figma · Prontos a construir ·", "Ready": "Pronto", "to build": "a construir", "Ready for your developer.": "Pronto para o teu programador.", "You get finished design files that any developer can build from. Need a developer? I can recommend one.": "Recebes ficheiros de design finais que qualquer programador consegue construir. Precisas de um programador? Posso recomendar um.", "How it": "Como", "works": "funciona", "Three steps, from first message to final files.": "Três passos, da primeira mensagem aos ficheiros finais.", "talk": "falar", "Call": "Chamada", "Proposal": "Proposta", "We talk": "Falamos", "A short call about your project, your goals and your timeline. Then I send you a clear proposal and price.": "Uma chamada curta sobre o teu projeto, objetivos e prazos. Depois envio-te uma proposta clara com o preço.", "make": "criar", "Concept": "Conceito", "Feedback": "Feedback", "I design": "Eu desenho", "I present a first direction, then we refine it together through rounds of feedback.": "Apresento uma primeira direção e depois afinamos juntos em rondas de feedback.", "send": "enviar", "Files": "Ficheiros", "Guide": "Guia", "You get the files": "Recebes os ficheiros", "Everything you need, organised and ready to use, plus a guide on how to use it.": "Tudo o que precisas, organizado e pronto a usar, com um guia de utilização.", "me": "mim", "The person behind the work.": "A pessoa por trás do trabalho.", "Hi, I’m": "Olá, sou o", "I’m a brand and web designer based in Portugal. I help small businesses and studios look as good as the work they do.": "Sou designer de branding e web, localizado em Portugal. Ajudo pequenos negócios e estúdios a parecerem tão bons como o trabalho que fazem.", "Based in": "Localizado em", "Brands and websites": "Branding e sites", "I work with": "Trabalho com", "Clients worldwide": "Clientes no mundo inteiro", "I reply": "Respondo", "Within 24 hours": "Em 24 horas", "Have a": "Tens um", "project": "projeto", "in mind?": "em mente?", "Send me an email with a few lines about it. I reply within 24 hours.": "Envia-me um email com algumas linhas sobre ele. Respondo em 24 horas.", "Copy email": "Copiar email", "Open for new projects": "Disponível para novos projetos", "Brand & web designer, Portugal": "Designer de branding & web, Portugal", "Brand & Web": "Branding & Web", "based in": "localizado em", "· Brand & web design": "· Branding & web design", "Back to top ↑": "Voltar ao topo ↑", "Email copied": "Email copiado", "Web design": "Web design", "worldwide": "no mundo inteiro", "Design": "Design", "Figma files": "Ficheiros Figma", "ready to build": "pronto a construir", "Email selected, press ⌘C to copy": "Email selecionado, carrega ⌘C para copiar", "Send me an email with a few lines about it.": "Envia-me um email com algumas linhas sobre ele.", "I reply within 24 hours.": "Respondo em 24 horas.", "Figma expert": "Especialista em Figma"}, OVR = {".svc h3": {"Brand": "Branding", "identity": ""}};
+    const skip = 'script,style,#days,#tickTr';
+    const items = [];
+    function collect(root){
+      const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      let n; while((n = w.nextNode())){
+        const el = n.parentElement; if(el && el.closest(skip)) continue;
+        const raw = n.textContent, key = raw.trim().replace(/\s+/g,' ');
+        if(!key) continue;
+        let pt = PT[key];
+        for(const sel in OVR){ if(el && el.closest(sel) && OVR[sel][key]) pt = OVR[sel][key]; }
+        if(pt === undefined || pt === key) continue;
+        const lead = raw.match(/^\s*/)[0], trail = raw.match(/\s*$/)[0];
+        items.push({n, en: raw, pt: lead + pt + trail});
+      }
+    }
+    collect(document.body);
+    document.querySelectorAll('template').forEach(t => collect(t.content));
+    window.__t = k => (document.documentElement.lang === 'pt-PT' && PT[k]) || k;
+    const btn = document.getElementById('langBtn');
+    function apply(lang){
+      items.forEach(i => { i.n.textContent = lang === 'pt' ? i.pt : i.en; });
+      document.documentElement.lang = lang === 'pt' ? 'pt-PT' : 'en';
+      btn.querySelectorAll('span').forEach(s => s.classList.toggle('on', s.dataset.l === lang));
+      if(typeof fillTicker === 'function') fillTicker();
+      try{ localStorage.setItem('sc-lang', lang); }catch(e){}
+    }
+    let saved = 'en'; try{ saved = localStorage.getItem('sc-lang') || 'en'; }catch(e){}
+    if(saved === 'pt') apply('pt');
+    btn.addEventListener('click', () => apply(document.documentElement.lang === 'pt-PT' ? 'en' : 'pt'));
+  })();
   // Copy email
   const btn = document.getElementById('copy'), toast = document.getElementById('toast'), mail = document.getElementById('mail');
   function show(m){ toast.textContent = m; toast.classList.add('show'); clearTimeout(show.t); show.t = setTimeout(()=>toast.classList.remove('show'), 1800); }
   function sel(){ const r = document.createRange(); r.selectNodeContents(mail); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
   btn.addEventListener('click', ()=>{
-    try{ navigator.clipboard.writeText(mail.textContent.trim()).then(()=>show('Email copied'), ()=>{ sel(); show('Email selected, press ⌘C to copy'); }); }
-    catch(e){ sel(); show('Email selected, press ⌘C to copy'); }
+    try{ navigator.clipboard.writeText(mail.textContent.trim()).then(()=>show(__t('Email copied')), ()=>{ sel(); show(__t('Email selected, press ⌘C to copy')); }); }
+    catch(e){ sel(); show(__t('Email selected, press ⌘C to copy')); }
+  });
+  const c2 = document.getElementById('copy2');
+  c2.addEventListener('click', ()=>{
+    btn.click();
+    c2.classList.add('done'); clearTimeout(c2.t); c2.t = setTimeout(()=>c2.classList.remove('done'), 1600);
   });
 })();
 </script>
